@@ -2,6 +2,15 @@
 // present in this directory. You're encouraged to place your actual application logic in
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
+import 'bootstrap/dist/css/bootstrap.css'
+import '@fortawesome/fontawesome-free/js/fontawesome'
+import '@fortawesome/fontawesome-free/js/solid'
+import '@fortawesome/fontawesome-free/js/regular'
+import '@fortawesome/fontawesome-free/js/brands'
+
+import 'jquery'
+import 'popper.js'
+import 'bootstrap'
 
 require("@rails/ujs").start()
 require("turbolinks").start()

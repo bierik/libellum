@@ -1,0 +1,8 @@
+de-CH:
+  activerecord:
+    models:
+      flat_template: Pauschalvorlage
+    attributes:
+      flat_template:
+        name: Name
+        price: Preis

@@ -1,0 +1,12 @@
+<p>
+  <strong>Name:</strong>
+  <%= @flat_template.name %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @flat_template.price %>
+</p>
+
+<%= link_to 'Edit', edit_flat_template_path(@flat_template) %> |
+<%= link_to 'Back', flat_templates_path %>

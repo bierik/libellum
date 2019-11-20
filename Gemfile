@@ -29,7 +29,9 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'aws-sdk-s3', require: false
-gem 'google_maps_service', require: false
+gem 'google_maps_service'
+gem 'bootstrap_form', '~> 4.3'
+gem 'rails-i18n', '~> 6.0.0'
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
