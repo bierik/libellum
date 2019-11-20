@@ -7,10 +7,10 @@ class Invoice < ApplicationRecord
   attribute :download_link
   attribute :number
 
-  scope :lookup, -> (customer, from, to) do
+  scope :lookup, lambda { |customer, from, to|
     Invoice.where('date >= ? AND date <= ?', Date.parse(from), Date.parse(to))
            .where(customer: customer)
-  end
+  }
 
   def self.generate_document!(customer, tasks)
     invoice = Invoice.create!(customer: customer, date: Date.today)
@@ -29,7 +29,7 @@ class Invoice < ApplicationRecord
 
   def number
     number = id.to_s.rjust(3, '0')
-    "#{number}/#{date.strftime("%y")}"
+    "#{number}/#{date.strftime('%y')}"
   end
 
   private

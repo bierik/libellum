@@ -3,11 +3,11 @@ class InvoicePDF
   include ActionView::Helpers::NumberHelper
 
   def initialize(customer, tasks, invoice)
-    font_families.update("Arial" => {
-      :normal => Rails.root.join("app/assets/fonts/Arial-Regular.ttf"),
-      :bold => Rails.root.join("app/assets/fonts/Arial-Bold.ttf"),
-    })
-    font "Arial"
+    font_families.update('Arial' => {
+                           normal: Rails.root.join('app/assets/fonts/Arial-Regular.ttf'),
+                           bold: Rails.root.join('app/assets/fonts/Arial-Bold.ttf'),
+                         })
+    font 'Arial'
     font_size 10
 
     settings = Settings.instance
@@ -21,8 +21,8 @@ class InvoicePDF
 
     bounding_box(
       [pad[:left], bounds.height - pad[:top]],
-      :width => bounds.width - pad[:left] - pad[:right],
-      :height => bounds.height - pad[:top] - pad[:bottom],
+      width: bounds.width - pad[:left] - pad[:right],
+      height: bounds.height - pad[:top] - pad[:bottom],
     ) do
       bounding_box([270, bounds.height - 85], width: bounds.width, height: 100) do
         text "#{customer.firstname} #{customer.lastname}"
@@ -43,15 +43,15 @@ class InvoicePDF
               I18n.l(task.start.to_date),
               report.title,
               report.round_time_reported,
-              number_to_currency(customer.price_per_hour, format: "%n %u"),
-              number_to_currency(report.round_price, format: "%n %u"),
+              number_to_currency(customer.price_per_hour, format: '%n %u'),
+              number_to_currency(report.round_price, format: '%n %u'),
             ]
           end
         end
 
-        report_data.unshift ["Datum", "Bezeichnung", "Anzahl Stunden", "Ansatz", "Subtotal"]
+        report_data.unshift ['Datum', 'Bezeichnung', 'Anzahl Stunden', 'Ansatz', 'Subtotal']
         total_report = tasks.flat_map(&:reports).sum(&:round_price)
-        report_data.push([{content: "Subtotal", colspan: 4}, number_to_currency(total_report, format: "%n %u")])
+        report_data.push([{ content: 'Subtotal', colspan: 4 }, number_to_currency(total_report, format: '%n %u')])
 
         table(report_data, width: bounds.width) do
           cells.padding = 4
@@ -68,8 +68,18 @@ class InvoicePDF
         route_flat = customer.route_flat.presence || 0
         route_flat_price = route_flat * route_flat_count
         way_data = [
-          ["Bezeichnung", "Anzahl", "Ansatz", "Subtotal"],
-          ["Wegpauschale", route_flat_count, number_to_currency(route_flat, format: "%n %u"), number_to_currency(route_flat_price, format: "%n %u")],
+          %w[
+            Bezeichnung
+            Anzahl
+            Ansatz
+            Subtotal
+          ],
+          [
+            'Wegpauschale',
+            route_flat_count,
+            number_to_currency(route_flat, format: '%n %u'),
+            number_to_currency(route_flat_price, format: '%n %u'),
+          ],
         ]
 
         table(way_data, width: bounds.width) do
@@ -84,16 +94,16 @@ class InvoicePDF
             [
               I18n.l(task.start.to_date),
               flat.name,
-              number_to_currency(flat.price, format: "%n %u"),
+              number_to_currency(flat.price, format: '%n %u'),
             ]
           end
         end
 
-        flat_data.unshift ["Datum", "Bezeichnung", "Preis"]
+        flat_data.unshift %w[Datum Bezeichnung Preis]
         total_flat = tasks.flat_map(&:flats).sum(&:price)
-        flat_data.push([{content: "Subtotal", colspan: 2}, number_to_currency(total_flat, format: "%n %u")])
+        flat_data.push([{ content: 'Subtotal', colspan: 2 }, number_to_currency(total_flat, format: '%n %u')])
 
-        if total_flat > 0
+        if total_flat.positive?
           move_down 20
           table(flat_data, width: bounds.width) do
             cells.padding = 4
@@ -106,7 +116,7 @@ class InvoicePDF
         end
 
         total_data = [
-          ["Total", "#{number_to_currency(total_report + total_flat + route_flat_price, format: "%n %u")}"],
+          ['Total', number_to_currency(total_report + total_flat + route_flat_price, format: '%n %u').to_s],
         ]
 
         move_down 20
@@ -119,10 +129,10 @@ class InvoicePDF
         end
 
         move_down 50
-        text "Konditionen: Zahlbar innert 10 Arbeitstagen rein netto."
+        text 'Konditionen: Zahlbar innert 10 Arbeitstagen rein netto.'
 
         move_down 40
-        text "Herzlichen Dank für Ihren Auftrag."
+        text 'Herzlichen Dank für Ihren Auftrag.'
       end
     end
   end

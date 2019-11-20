@@ -10,7 +10,7 @@ class Task < ApplicationRecord
 
   default_scope { order(start: :asc) }
 
-  scope :between, -> (from, to) { where('start >= ? AND start <= ?', from, to ) }
+  scope :between, ->(from, to) { where('start >= ? AND start <= ?', from, to) }
 
   def time_reported
     ActiveSupport::Duration.build(reports.to_a.sum(0, &:time_reported).round).iso8601
@@ -25,10 +25,10 @@ class Task < ApplicationRecord
   end
 
   def as_json(*)
-    super.merge(time_reported: time_reported, total_flat: total_flat, is_recurring: is_recurring?)
+    super.merge(time_reported: time_reported, total_flat: total_flat, recurring: recurring?)
   end
 
-  def is_recurring?
+  def recurring?
     !task_container.nil?
   end
 end

@@ -9,8 +9,7 @@ class FlatTemplatesController < ApplicationController
 
   # GET /flat_templates/1
   # GET /flat_templates/1.json
-  def show
-  end
+  def show; end
 
   # GET /flat_templates/new
   def new
@@ -18,8 +17,7 @@ class FlatTemplatesController < ApplicationController
   end
 
   # GET /flat_templates/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /flat_templates
   # POST /flat_templates.json
@@ -62,13 +60,13 @@ class FlatTemplatesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_flat_template
-      @flat_template = FlatTemplate.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_flat_template
+    @flat_template = FlatTemplate.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def flat_template_params
-      params.require(:flat_template).permit(:name, :price)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def flat_template_params
+    params.require(:flat_template).permit(:name, :price)
+  end
 end

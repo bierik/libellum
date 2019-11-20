@@ -1,0 +1,9 @@
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+inherit_from:
+  - https://raw.githubusercontent.com/siegy22/dotfiles/47dd5ff17a2fbe600c04652f826e5011bb608fff/rubocop.yml
