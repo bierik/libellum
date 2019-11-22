@@ -30,11 +30,12 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'aws-sdk-s3', require: false
 gem 'bootstrap_form', '~> 4.3'
+gem 'font-awesome-rails'
 gem 'google_maps_service'
-gem 'rails-i18n', '~> 6.0.0'
-gem 'rubocop'
 gem 'prawn'
 gem 'prawn-table'
+gem 'rails-i18n', '~> 6.0.0'
+gem 'rubocop'
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.

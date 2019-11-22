@@ -36,7 +36,7 @@ class FlatTemplatesControllerTest < ActionDispatch::IntegrationTest
   test 'should update flat_template' do
     patch flat_template_url(@flat_template),
           params: { flat_template: { name: @flat_template.name, price: @flat_template.price } }
-    assert_redirected_to flat_template_url(@flat_template)
+    assert_redirected_to flat_templates_url
   end
 
   test 'should destroy flat_template' do

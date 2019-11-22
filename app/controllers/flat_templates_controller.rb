@@ -4,7 +4,7 @@ class FlatTemplatesController < ApplicationController
   # GET /flat_templates
   # GET /flat_templates.json
   def index
-    @flat_templates = FlatTemplate.all
+    @flat_templates = FlatTemplate.ordered
   end
 
   # GET /flat_templates/1
@@ -26,7 +26,7 @@ class FlatTemplatesController < ApplicationController
 
     respond_to do |format|
       if @flat_template.save
-        format.html { redirect_to @flat_template, notice: 'Flat template was successfully created.' }
+        format.html { redirect_to @flat_template, notice: 'Pauschalvorlage wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @flat_template }
       else
         format.html { render :new }
@@ -40,7 +40,7 @@ class FlatTemplatesController < ApplicationController
   def update
     respond_to do |format|
       if @flat_template.update(flat_template_params)
-        format.html { redirect_to @flat_template, notice: 'Flat template was successfully updated.' }
+        format.html { redirect_to flat_templates_path, notice: 'Pauschalvorlage wurde erfolgreich aktualisiert.' }
         format.json { render :show, status: :ok, location: @flat_template }
       else
         format.html { render :edit }
@@ -54,7 +54,7 @@ class FlatTemplatesController < ApplicationController
   def destroy
     @flat_template.destroy
     respond_to do |format|
-      format.html { redirect_to flat_templates_url, notice: 'Flat template was successfully destroyed.' }
+      format.html { redirect_to flat_templates_path, notice: 'Pauschalvorlage wurde erfolgreich gelöscht.' }
       format.json { head :no_content }
     end
   end
