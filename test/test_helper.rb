@@ -8,6 +8,14 @@ class ActiveSupport::TestCase
 
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
+end
 
-  # Add more helper methods to be used by all tests here...
+class ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
+  setup do
+    # There's an organization with the handle "peter".
+    host! 'peter.example.com'
+    sign_in users(:peter)
+  end
 end

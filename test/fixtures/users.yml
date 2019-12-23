@@ -1,0 +1,9 @@
+peter:
+  email: peter.mueller@example.org
+  encrypted_password: <%= User.new.send(:password_digest, 'fahrschule123') %>
+  organizations:
+    - fahrlehrer_peter
+
+jack:
+  email: jack.sparrow@example.org
+  encrypted_password: <%= User.new.send(:password_digest, 'black-pearl-123') %>

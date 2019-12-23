@@ -30,6 +30,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'aws-sdk-s3', require: false
 gem 'bootstrap_form', '~> 4.3'
+gem 'devise'
+gem 'devise-i18n'
 gem 'font-awesome-rails'
 gem 'google_maps_service'
 gem 'prawn'

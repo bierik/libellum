@@ -1,15 +1,13 @@
 class ApplicationController < ActionController::Base
-  before_action :check_organization
-
-  if Rails.env.production?
-    http_basic_authenticate_with(
-      name: Rails.application.credentials.dig(:basic_auth, :username),
-      password: Rails.application.credentials.dig(:basic_auth, :password),
-    )
-  end
+  before_action :authenticate_user!, :current_organization
+  before_action :check_organization_access, unless: :devise_controller?
 
   private
-  def check_organization
-    Organization.find_by!(handle: request.subdomain)
+  def check_organization_access
+    current_organization.users.include?(current_user)
+  end
+
+  def current_organization
+    @current_organization ||= Organization.find_by!(handle: request.subdomain)
   end
 end
