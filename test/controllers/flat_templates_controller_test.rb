@@ -20,7 +20,7 @@ class FlatTemplatesControllerTest < ActionDispatch::IntegrationTest
       post flat_templates_url, params: { flat_template: { name: @flat_template.name, price: @flat_template.price } }
     end
 
-    assert_redirected_to flat_template_url(FlatTemplate.last)
+    assert_redirected_to flat_templates_url
   end
 
   test 'should show flat_template' do

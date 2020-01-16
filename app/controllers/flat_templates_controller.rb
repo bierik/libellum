@@ -26,7 +26,7 @@ class FlatTemplatesController < ApplicationController
 
     respond_to do |format|
       if @flat_template.save
-        format.html { redirect_to @flat_template, notice: 'Pauschalvorlage wurde erfolgreich erstellt.' }
+        format.html { redirect_to flat_templates_path, notice: 'Pauschalvorlage wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @flat_template }
       else
         format.html { render :new }
