@@ -69,4 +69,10 @@ class FlatTemplatesController < ApplicationController
   def flat_template_params
     params.require(:flat_template).permit(:name, :price)
   end
+
+  def current_context
+    'flat_templates'
+  end
+
+  helper_method :current_context
 end
