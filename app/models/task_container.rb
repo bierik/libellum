@@ -1,4 +1,6 @@
 class TaskContainer < ApplicationRecord
+  include Organizationable
+
   has_many :tasks, dependent: :destroy
 
   def following(from)

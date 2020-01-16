@@ -4,7 +4,7 @@ class FlatTemplatesController < ApplicationController
   # GET /flat_templates
   # GET /flat_templates.json
   def index
-    @flat_templates = FlatTemplate.ordered
+    @flat_templates = current_organization.flat_templates.ordered
   end
 
   # GET /flat_templates/1
@@ -13,7 +13,7 @@ class FlatTemplatesController < ApplicationController
 
   # GET /flat_templates/new
   def new
-    @flat_template = FlatTemplate.new
+    @flat_template = current_organization.flat_templates.new
   end
 
   # GET /flat_templates/1/edit
@@ -22,7 +22,7 @@ class FlatTemplatesController < ApplicationController
   # POST /flat_templates
   # POST /flat_templates.json
   def create
-    @flat_template = FlatTemplate.new(flat_template_params)
+    @flat_template = current_organization.flat_templates.new(flat_template_params)
 
     respond_to do |format|
       if @flat_template.save
@@ -62,7 +62,7 @@ class FlatTemplatesController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_flat_template
-    @flat_template = FlatTemplate.find(params[:id])
+    @flat_template = current_organization.flat_templates.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

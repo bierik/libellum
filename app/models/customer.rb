@@ -1,4 +1,6 @@
 class Customer < ApplicationRecord
+  include Organizationable
+
   has_many :tasks, dependent: :destroy
   has_many :flats, through: :tasks, dependent: :destroy
   has_many :reports, through: :tasks, dependent: :destroy

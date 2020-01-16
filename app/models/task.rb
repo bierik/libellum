@@ -1,6 +1,6 @@
-require 'active_support'
-
 class Task < ApplicationRecord
+  include Organizationable
+
   has_many :reports, dependent: :destroy
   has_many :flats, dependent: :destroy
   belongs_to :customer

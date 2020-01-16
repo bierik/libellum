@@ -1,4 +1,6 @@
 class Report < ApplicationRecord
+  include Organizationable
+
   belongs_to :task
 
   validates_presence_of :start_at

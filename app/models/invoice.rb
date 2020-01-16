@@ -1,4 +1,6 @@
 class Invoice < ApplicationRecord
+  include Organizationable
+
   belongs_to :customer
   has_one_attached :invoice_document
 

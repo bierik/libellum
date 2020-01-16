@@ -48,11 +48,15 @@ ActiveRecord::Schema.define(version: 2020_01_16_204043) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "price_per_hour", default: "50.0"
+    t.bigint "organization_id", null: false
+    t.index ["organization_id"], name: "index_customers_on_organization_id"
   end
 
   create_table "flat_templates", force: :cascade do |t|
     t.string "name"
     t.float "price"
+    t.bigint "organization_id", null: false
+    t.index ["organization_id"], name: "index_flat_templates_on_organization_id"
   end
 
   create_table "flats", force: :cascade do |t|
@@ -61,6 +65,8 @@ ActiveRecord::Schema.define(version: 2020_01_16_204043) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "task_id"
+    t.bigint "organization_id", null: false
+    t.index ["organization_id"], name: "index_flats_on_organization_id"
   end
 
   create_table "invoices", force: :cascade do |t|
@@ -69,6 +75,8 @@ ActiveRecord::Schema.define(version: 2020_01_16_204043) do
     t.integer "customer_id"
     t.date "date"
     t.boolean "archived"
+    t.bigint "organization_id", null: false
+    t.index ["organization_id"], name: "index_invoices_on_organization_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -92,6 +100,8 @@ ActiveRecord::Schema.define(version: 2020_01_16_204043) do
     t.datetime "updated_at", null: false
     t.integer "task_id"
     t.string "title"
+    t.bigint "organization_id", null: false
+    t.index ["organization_id"], name: "index_reports_on_organization_id"
   end
 
   create_table "settings", force: :cascade do |t|
@@ -107,6 +117,8 @@ ActiveRecord::Schema.define(version: 2020_01_16_204043) do
   create_table "task_containers", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "organization_id", null: false
+    t.index ["organization_id"], name: "index_task_containers_on_organization_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -116,6 +128,8 @@ ActiveRecord::Schema.define(version: 2020_01_16_204043) do
     t.integer "customer_id"
     t.bigint "task_container_id"
     t.datetime "end"
+    t.bigint "organization_id", null: false
+    t.index ["organization_id"], name: "index_tasks_on_organization_id"
     t.index ["task_container_id"], name: "index_tasks_on_task_container_id"
   end
 
