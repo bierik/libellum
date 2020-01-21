@@ -10,7 +10,7 @@ class Customer < ApplicationRecord
 
   def calculate_distance!
     self.distance = google_maps_service.directions(
-      Settings.instance.directions_api_address,
+      organization.directions_api_address,
       directions_api_address,
     )
   end

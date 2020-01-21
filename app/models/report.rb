@@ -26,7 +26,6 @@ class Report < ApplicationRecord
   end
 
   def round_seconds_reported
-    report_invoice_round = Settings.instance.report_invoice_round
-    report_invoice_round * (time_reported / report_invoice_round).round
+    organization.report_invoice_round * (time_reported / report_invoice_round).round
   end
 end

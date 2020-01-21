@@ -2,15 +2,13 @@ class InvoicePDF
   include Prawn::View
   include ActionView::Helpers::NumberHelper
 
-  def initialize(customer, tasks, invoice)
+  def initialize(organization, customer, tasks, invoice)
     font_families.update('Arial' => {
                            normal: Rails.root.join('app/assets/fonts/Arial-Regular.ttf'),
                            bold: Rails.root.join('app/assets/fonts/Arial-Bold.ttf'),
                          })
     font 'Arial'
     font_size 10
-
-    settings = Settings.instance
 
     pad = {
       top: 0,
@@ -31,7 +29,7 @@ class InvoicePDF
       end
 
       bounding_box([270, bounds.height - 205], width: bounds.width, height: 50) do
-        text "#{I18n.l(Date.today)}, #{settings.place}"
+        text "#{I18n.l(Date.today)}, #{organization.place}"
       end
 
       text "Rechnung Nr. #{invoice.number}", size: 12, style: :bold
