@@ -8,6 +8,8 @@ class Customer < ApplicationRecord
 
   validates_presence_of :firstname, :lastname, :street, :number, :place, :zip
 
+  scope :ordered, -> { order(:lastname, :firstname) }
+
   def calculate_distance!
     self.distance = google_maps_service.directions(
       organization.directions_api_address,
