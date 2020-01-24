@@ -2,7 +2,7 @@ class InvoicePDF
   include Prawn::View
   include ActionView::Helpers::NumberHelper
 
-  def initialize(organization, customer, tasks, invoice)
+  def initialize(organization, customer, reports, flats, invoice)
     font_families.update('Arial' => {
                            normal: Rails.root.join('app/assets/fonts/Arial-Regular.ttf'),
                            bold: Rails.root.join('app/assets/fonts/Arial-Bold.ttf'),
@@ -35,20 +35,18 @@ class InvoicePDF
       text "Rechnung Nr. #{invoice.number}", size: 12, style: :bold
 
       bounding_box([0, bounds.height - 275], width: bounds.width, height: bounds.height - 300) do
-        report_data = tasks.flat_map do |task|
-          task.reports.map do |report|
-            [
-              I18n.l(task.start.to_date),
-              report.title,
-              report.round_time_reported,
-              number_to_currency(customer.price_per_hour, format: '%n %u'),
-              number_to_currency(report.round_price, format: '%n %u'),
-            ]
-          end
+        report_data = reports.map do |report|
+          [
+            I18n.l(report.start_at.to_date),
+            report.title,
+            report.round_time_reported,
+            number_to_currency(customer.price_per_hour, format: '%n %u'),
+            number_to_currency(report.round_price, format: '%n %u'),
+          ]
         end
 
-        report_data.unshift ['Datum', 'Bezeichnung', 'Anzahl Stunden', 'Ansatz', 'Subtotal']
-        total_report = tasks.flat_map(&:reports).sum(&:round_price)
+        report_data.unshift %w[Datum Bezeichnung Dauer Ansatz Subtotal]
+        total_report = reports.sum(&:round_price)
         report_data.push([{ content: 'Subtotal', colspan: 4 }, number_to_currency(total_report, format: '%n %u')])
 
         table(report_data, width: bounds.width) do
@@ -62,7 +60,7 @@ class InvoicePDF
 
         move_down 20
 
-        route_flat_count = tasks.flat_map(&:reports).length
+        route_flat_count = reports.length
         route_flat = customer.route_flat.presence || 0
         route_flat_price = route_flat * route_flat_count
         way_data = [
@@ -87,18 +85,16 @@ class InvoicePDF
           columns(3).align = :right
         end
 
-        flat_data = tasks.flat_map do |task|
-          task.flats.map do |flat|
-            [
-              I18n.l(task.start.to_date),
-              flat.name,
-              number_to_currency(flat.price, format: '%n %u'),
-            ]
-          end
+        flat_data = flats.map do |flat|
+          [
+            I18n.l(flat.used_date),
+            flat.name,
+            number_to_currency(flat.price, format: '%n %u'),
+          ]
         end
 
         flat_data.unshift %w[Datum Bezeichnung Preis]
-        total_flat = tasks.flat_map(&:flats).sum(&:price)
+        total_flat = flats.sum(&:price)
         flat_data.push([{ content: 'Subtotal', colspan: 2 }, number_to_currency(total_flat, format: '%n %u')])
 
         if total_flat.positive?
