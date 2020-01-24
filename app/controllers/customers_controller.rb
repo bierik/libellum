@@ -23,6 +23,7 @@ class CustomersController < ApplicationController
   # POST /customer.json
   def create
     @customer = current_organization.customers.new(customer_params)
+    @customer.calculate_route_flat!
 
     respond_to do |format|
       if @customer.save
@@ -68,8 +69,8 @@ class CustomersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def customer_params
     params.require(:customer).permit(
-      :firstname,
-      :lastname,
+      :first_name,
+      :last_name,
       :street,
       :number,
       :place,

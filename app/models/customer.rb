@@ -10,14 +10,8 @@ class Customer < ApplicationRecord
 
   scope :ordered, -> { order(:lastname, :firstname) }
 
-  def calculate_distance!
-    self.distance = google_maps_service.directions(
-      organization.directions_api_address,
-      directions_api_address,
-    )
-  end
-
   def calculate_route_flat!
+    calculate_distance!
     self.route_flat = case distance
                       when 0..5_000
                         5
@@ -40,7 +34,14 @@ class Customer < ApplicationRecord
     "#{street} #{number}, #{zip} #{place}"
   end
 
-  def google_maps_service
-    Rails.application.config.google_maps_service
+  private
+
+  def calculate_distance!
+    self.distance = Rails.application.config.google_maps_service.new(
+      organization.directions_api_address,
+      directions_api_address,
+      language: Google::Maps.default_language,
+    ).distance.value
   end
+
 end

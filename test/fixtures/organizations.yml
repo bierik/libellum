@@ -3,8 +3,8 @@ fahrlehrer_peter:
   name: Fahrlehrer Peter
   first_name: Peter
   last_name: Müller
-  street: Musterstrasse
-  number: 1
-  zip: 6666
-  place: Musterstadt
+  street: Thalwiesenstrasse
+  number: 16
+  zip: 8302
+  place: Kloten ZH
   price_per_hour: 80

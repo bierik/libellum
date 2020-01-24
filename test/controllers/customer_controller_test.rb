@@ -10,11 +10,6 @@ class CustomerControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  # test 'should get new' do
-  #   get new_customer_url
-  #   assert_response :success
-  # end
-
   test 'should create customer' do
     assert_difference('Customer.count') do
       post customers_url, params: { customer: {
@@ -24,6 +19,8 @@ class CustomerControllerTest < ActionDispatch::IntegrationTest
         number: @customer.number,
         place: @customer.place,
         zip: @customer.zip,
+        distance: 3000,
+        route_flat: 5,
       } }
     end
 
