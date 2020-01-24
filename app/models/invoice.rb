@@ -16,7 +16,7 @@ class Invoice < ApplicationRecord
 
   def self.generate_document!(customer, tasks)
     invoice = Invoice.create!(customer: customer, date: Date.today)
-    pdf = InvoicePDF.new(customer, tasks, invoice)
+    pdf = InvoicePDF.new(organization, customer, tasks, invoice)
     invoice.invoice_document.attach(
       io: StringIO.new(pdf.render),
       filename: invoice.filename,

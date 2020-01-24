@@ -113,6 +113,13 @@ ActiveRecord::Schema.define(version: 2020_01_24_194426) do
     t.index ["organization_id"], name: "index_reports_on_organization_id"
   end
 
+  create_table "task_containers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "organization_id", null: false
+    t.index ["organization_id"], name: "index_task_containers_on_organization_id"
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.datetime "start"
     t.datetime "created_at", null: false
