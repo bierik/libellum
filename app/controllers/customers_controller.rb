@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: [:edit, :update, :destroy]
+  before_action :set_customer, only: [:edit, :update, :destroy, :update_route_flat]
 
   # GET /customers
   # GET /customers.json
@@ -58,6 +58,12 @@ class CustomersController < ApplicationController
       format.html { redirect_to customers_path, notice: 'Kunde wurde erfolgreich gelöscht.' }
       format.json { head :no_content }
     end
+  end
+
+  def update_route_flat
+    @customer.calculate_route_flat!
+    @customer.save
+    redirect_to edit_customer_path(@customer), notice: 'Wegpauschale wurde aktualisiert.'
   end
 
   private

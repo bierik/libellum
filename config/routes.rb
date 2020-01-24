@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :flat_templates
-  resources :customers
+  resources :customers do
+    patch 'update_route_flat', to: 'customers#update_route_flat', on: :member
+  end
 end
