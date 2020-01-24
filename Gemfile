@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'aws-sdk-s3', require: false
+gem 'barnes'
 gem 'bootstrap_form', '~> 4.3'
 gem 'devise'
 gem 'devise-i18n'
