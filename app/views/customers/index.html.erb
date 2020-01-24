@@ -1,45 +1,24 @@
-<p id="notice"><%= notice %></p>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1>Kunden</h1>
+  <%= link_to new_customer_path, class: 'btn btn-primary' do %>
+    <%= fa_icon 'plus', text: 'Hinzufügen' %>
+  <% end %>
+</div>
 
-<h1>Customers</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Firstname</th>
-      <th>Lastname</th>
-      <th>Street</th>
-      <th>Number</th>
-      <th>Place</th>
-      <th>Zip</th>
-      <th>Distance</th>
-      <th>Route flat</th>
-      <th>Price per hour</th>
-      <th>Organization</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @customers.each do |customer| %>
-      <tr>
-        <td><%= customer.firstname %></td>
-        <td><%= customer.lastname %></td>
-        <td><%= customer.street %></td>
-        <td><%= customer.number %></td>
-        <td><%= customer.place %></td>
-        <td><%= customer.zip %></td>
-        <td><%= customer.distance %></td>
-        <td><%= customer.route_flat %></td>
-        <td><%= customer.price_per_hour %></td>
-        <td><%= customer.organization_id %></td>
-        <td><%= link_to 'Show', customer %></td>
-        <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
-        <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Customer', new_customer_path %>
+<div class="list-group">
+  <% @customers.each do |customer| %>
+    <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+      <div>
+        <h5 class="mb-1">
+          <%= link_to customer.full_name, edit_customer_path(customer) %>
+        </h5>
+        <p class="mb-1">
+          <%= customer.address %>
+        </p>
+      </div>
+      <%= link_to customer, class: 'btn text-danger shadow-none', method: :delete, data: { confirm: 'Wosch würk?' } do %>
+        <%= fa_icon 'trash-alt' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -30,18 +30,21 @@ class Customer < ApplicationRecord
                       end
   end
 
-  def directions_api_address
+  def address
     "#{street} #{number}, #{zip} #{place}"
+  end
+
+  def full_name
+    [first_name, last_name].join(' ')
   end
 
   private
 
   def calculate_distance!
     self.distance = Rails.application.config.google_maps_service.new(
-      organization.directions_api_address,
-      directions_api_address,
+      organization.address,
+      address,
       language: Google::Maps.default_language,
     ).distance.value
   end
-
 end
