@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_16_204043) do
+ActiveRecord::Schema.define(version: 2020_01_24_194426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,15 @@ ActiveRecord::Schema.define(version: 2020_01_16_204043) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "company"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "street"
+    t.string "number"
+    t.string "zip"
+    t.string "place"
+    t.float "price_per_hour"
+    t.integer "report_invoice_round", default: 300
   end
 
   create_table "organizations_users", id: false, force: :cascade do |t|
@@ -104,33 +113,14 @@ ActiveRecord::Schema.define(version: 2020_01_16_204043) do
     t.index ["organization_id"], name: "index_reports_on_organization_id"
   end
 
-  create_table "settings", force: :cascade do |t|
-    t.string "firstname"
-    t.string "lastname"
-    t.string "street"
-    t.string "number"
-    t.string "place"
-    t.string "zip"
-    t.string "maps_api_key"
-  end
-
-  create_table "task_containers", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "organization_id", null: false
-    t.index ["organization_id"], name: "index_task_containers_on_organization_id"
-  end
-
   create_table "tasks", force: :cascade do |t|
     t.datetime "start"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "customer_id"
-    t.bigint "task_container_id"
     t.datetime "end"
     t.bigint "organization_id", null: false
     t.index ["organization_id"], name: "index_tasks_on_organization_id"
-    t.index ["task_container_id"], name: "index_tasks_on_task_container_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -164,5 +154,4 @@ ActiveRecord::Schema.define(version: 2020_01_16_204043) do
   add_foreign_key "invoices", "customers"
   add_foreign_key "reports", "tasks"
   add_foreign_key "tasks", "customers"
-  add_foreign_key "tasks", "task_containers"
 end
