@@ -4,7 +4,6 @@ class Task < ApplicationRecord
   has_many :reports, dependent: :destroy
   has_many :flats, dependent: :destroy
   belongs_to :customer
-  belongs_to :task_container, optional: true
 
   validates_presence_of :start
 
@@ -29,6 +28,6 @@ class Task < ApplicationRecord
   end
 
   def recurring?
-    !task_container.nil?
+    false
   end
 end

@@ -1,5 +1,5 @@
 class Organization < ApplicationRecord
-  %i[customers flats flat_templates invoices reports tasks task_containers].each do |model|
+  %i[customers flats flat_templates invoices reports tasks].each do |model|
     has_many model
   end
 
