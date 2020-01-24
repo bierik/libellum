@@ -73,6 +73,4 @@ class FlatTemplatesController < ApplicationController
   def current_context
     'flat_templates'
   end
-
-  helper_method :current_context
 end
