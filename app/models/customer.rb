@@ -6,9 +6,9 @@ class Customer < ApplicationRecord
   has_many :reports, through: :tasks, dependent: :destroy
   has_many :invoices, dependent: :destroy
 
-  validates_presence_of :firstname, :lastname, :street, :number, :place, :zip
+  validates_presence_of :first_name, :last_name, :street, :number, :place, :zip
 
-  scope :ordered, -> { order(:lastname, :firstname) }
+  scope :ordered, -> { order(:last_name, :first_name) }
 
   def calculate_route_flat!
     calculate_distance!

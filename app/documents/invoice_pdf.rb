@@ -23,7 +23,7 @@ class InvoicePDF
       height: bounds.height - pad[:top] - pad[:bottom],
     ) do
       bounding_box([270, bounds.height - 85], width: bounds.width, height: 100) do
-        text "#{customer.firstname} #{customer.lastname}"
+        text "#{customer.first_name} #{customer.last_name}"
         text "#{customer.street} #{customer.number}"
         text "#{customer.zip} #{customer.place}"
       end
