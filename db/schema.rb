@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_24_194426) do
+ActiveRecord::Schema.define(version: 2020_01_24_220245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,8 +64,10 @@ ActiveRecord::Schema.define(version: 2020_01_24_194426) do
     t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "task_id"
     t.bigint "organization_id", null: false
+    t.bigint "customer_id"
+    t.date "used_date", null: false
+    t.index ["customer_id"], name: "index_flats_on_customer_id"
     t.index ["organization_id"], name: "index_flats_on_organization_id"
   end
 
@@ -107,17 +109,11 @@ ActiveRecord::Schema.define(version: 2020_01_24_194426) do
     t.datetime "end_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "task_id"
     t.string "title"
     t.bigint "organization_id", null: false
+    t.bigint "customer_id"
+    t.index ["customer_id"], name: "index_reports_on_customer_id"
     t.index ["organization_id"], name: "index_reports_on_organization_id"
-  end
-
-  create_table "task_containers", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "organization_id", null: false
-    t.index ["organization_id"], name: "index_task_containers_on_organization_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -157,8 +153,8 @@ ActiveRecord::Schema.define(version: 2020_01_24_194426) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "flats", "tasks"
+  add_foreign_key "flats", "customers"
   add_foreign_key "invoices", "customers"
-  add_foreign_key "reports", "tasks"
+  add_foreign_key "reports", "customers"
   add_foreign_key "tasks", "customers"
 end

@@ -1,8 +1,6 @@
 class Task < ApplicationRecord
   include Organizationable
 
-  has_many :reports, dependent: :destroy
-  has_many :flats, dependent: :destroy
   belongs_to :customer
 
   validates_presence_of :start
@@ -19,12 +17,8 @@ class Task < ApplicationRecord
     (time_reported / (60 * 60)) * customer.price_per_hour
   end
 
-  def total_flat
-    flats.to_a.sum(0, &:price).round(2)
-  end
-
   def as_json(*)
-    super.merge(time_reported: time_reported, total_flat: total_flat, recurring: recurring?)
+    super.merge(time_reported: time_reported, recurring: recurring?)
   end
 
   def recurring?
