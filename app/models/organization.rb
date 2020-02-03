@@ -14,7 +14,7 @@ class Organization < ApplicationRecord
   validates :place, presence: true
   validates :price_per_hour, presence: true
 
-  def directions_api_address
+  def address
     "#{street} #{number}, #{zip} #{place}"
   end
 end

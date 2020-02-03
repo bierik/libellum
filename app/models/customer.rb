@@ -2,20 +2,16 @@ class Customer < ApplicationRecord
   include Organizationable
 
   has_many :tasks, dependent: :destroy
-  has_many :flats, through: :tasks, dependent: :destroy
-  has_many :reports, through: :tasks, dependent: :destroy
+  has_many :flats, dependent: :destroy
+  has_many :reports, dependent: :destroy
   has_many :invoices, dependent: :destroy
 
-  validates_presence_of :firstname, :lastname, :street, :number, :place, :zip
+  validates_presence_of :first_name, :last_name, :street, :number, :place, :zip
 
-  def calculate_distance!
-    self.distance = google_maps_service.directions(
-      organization.directions_api_address,
-      directions_api_address,
-    )
-  end
+  scope :ordered, -> { order(:last_name, :first_name) }
 
   def calculate_route_flat!
+    calculate_distance!
     self.route_flat = case distance
                       when 0..5_000
                         5
@@ -34,11 +30,21 @@ class Customer < ApplicationRecord
                       end
   end
 
-  def directions_api_address
+  def address
     "#{street} #{number}, #{zip} #{place}"
   end
 
-  def google_maps_service
-    Rails.application.config.google_maps_service
+  def full_name
+    [first_name, last_name].join(' ')
+  end
+
+  private
+
+  def calculate_distance!
+    self.distance = Rails.application.config.google_maps_service.new(
+      organization.address,
+      address,
+      language: Google::Maps.default_language,
+    ).distance.value
   end
 end

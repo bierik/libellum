@@ -26,7 +26,7 @@ class Invoice < ApplicationRecord
   end
 
   def filename
-    "rechnung_#{customer.firstname}_#{customer.lastname}_#{number.gsub('/', '_')}.pdf"
+    "rechnung_#{customer.first_name}_#{customer.last_name}_#{number.gsub('/', '_')}.pdf"
   end
 
   def number

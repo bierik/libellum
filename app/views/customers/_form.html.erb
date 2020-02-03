@@ -1,0 +1,11 @@
+<%= bootstrap_form_with(model: customer, local: true) do |f| %>
+  <%= f.text_field :first_name %>
+  <%= f.text_field :last_name %>
+  <%= f.text_field :street %>
+  <%= f.text_field :number %>
+  <%= f.text_field :place %>
+  <%= f.text_field :zip %>
+  <%= f.text_field :price_per_hour %>
+  <%= f.text_field :route_flat, append: link_to("berechnen", update_route_flat_customer_path(@customer), method: :patch, class: "btn btn-secondary") %>
+  <%= f.submit %>
+<% end %>
