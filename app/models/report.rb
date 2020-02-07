@@ -1,7 +1,7 @@
 class Report < ApplicationRecord
   include Organizationable
 
-  belongs_to :task
+  belongs_to :customer
 
   validates_presence_of :start_at
 
@@ -14,11 +14,11 @@ class Report < ApplicationRecord
   end
 
   def price
-    (time_reported / (60 * 60)) * task.customer.price_per_hour
+    (time_reported / (60 * 60)) * customer.price_per_hour
   end
 
   def round_price
-    (round_seconds_reported / (60.0 * 60.0)) * task.customer.price_per_hour
+    (round_seconds_reported / (60.0 * 60.0)) * customer.price_per_hour
   end
 
   def round_time_reported
@@ -26,6 +26,6 @@ class Report < ApplicationRecord
   end
 
   def round_seconds_reported
-    organization.report_invoice_round * (time_reported / report_invoice_round).round
+    organization.report_invoice_round * (time_reported / organization.report_invoice_round).round
   end
 end
