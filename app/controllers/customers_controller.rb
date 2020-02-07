@@ -23,10 +23,10 @@ class CustomersController < ApplicationController
   # POST /customer.json
   def create
     @customer = current_organization.customers.new(customer_params)
-    @customer.calculate_route_flat!
 
     respond_to do |format|
       if @customer.save
+        @customer.calculate_route_flat!
         format.html { redirect_to edit_customer_path(@customer), notice: 'Kunde wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @customer }
       else
