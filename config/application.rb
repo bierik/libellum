@@ -28,5 +28,6 @@ module Libellum
     # the framework and any gems in your application.
     config.i18n.available_locales = ['de-CH']
     config.i18n.default_locale = :'de-CH'
+    config.time_zone = 'Europe/Zurich'
   end
 end

@@ -3,11 +3,19 @@ class Task < ApplicationRecord
 
   belongs_to :customer
 
-  validates_presence_of :start
+  validates_presence_of :rrule, :duration, :title
 
-  default_scope { order(start: :asc) }
+  scope :ordered, -> { order(:rrule) }
 
-  scope :between, ->(from, to) { where('start >= ? AND start <= ?', from, to) }
+  FORT_NIGHTLY = :FORT_NIGHTLY
+
+  FREQUENCIES = [
+    ['Nie', ''],
+    ['Täglich', :DAILY],
+    ['Wöchentlich', :WEEKLY],
+    ['Alle zwei Wochen', FORT_NIGHTLY],
+    ['Monatlich', :MONTHLY],
+  ].freeze
 
   def time_reported
     ActiveSupport::Duration.build(reports.to_a.sum(0, &:time_reported).round).iso8601

@@ -17,3 +17,6 @@ de-CH:
         distance: Distanz
         route_flat: Wegpauschale
         price_per_hour: Stundenansatz
+  time:
+    formats:
+      rrule: "%Y%m%dT%H%M%S"

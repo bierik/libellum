@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_04_143620) do
+ActiveRecord::Schema.define(version: 2020_02_10_122325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 2020_02_04_143620) do
 
   create_table "organizations", force: :cascade do |t|
     t.string "handle", null: false
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "company"
@@ -118,12 +118,13 @@ ActiveRecord::Schema.define(version: 2020_02_04_143620) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.datetime "start"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "customer_id"
-    t.datetime "end"
     t.bigint "organization_id", null: false
+    t.string "rrule"
+    t.string "duration"
+    t.string "title"
     t.index ["organization_id"], name: "index_tasks_on_organization_id"
   end
 

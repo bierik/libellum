@@ -1,0 +1,17 @@
+weekly_recurring:
+  organization: fahrlehrer_peter
+  customer: heidi
+  rrule: |
+    DTSTART;TZID=Europe/Zurich:20200101T080000
+    FREQ=WEEKLY
+  duration: '02:00'
+  title: Fahrstunde
+
+single:
+  organization: fahrlehrer_peter
+  customer: heidi
+  rrule: |
+    DTSTART;TZID=Europe/Zurich:20200101T120000
+    COUNT=1
+  duration: '02:00'
+  title: Verkehrskundeunterricht

@@ -7,10 +7,15 @@ import '@fortawesome/fontawesome-free/js/fontawesome'
 import '@fortawesome/fontawesome-free/js/solid'
 import '@fortawesome/fontawesome-free/js/regular'
 import '@fortawesome/fontawesome-free/js/brands'
+import '@fullcalendar/core/main.css'
+import '@fullcalendar/timegrid/main.css'
+import '@fullcalendar/list/main.css'
+import '@fullcalendar/daygrid/main.css'
 
 import 'jquery'
 import 'popper.js'
 import 'bootstrap'
+import '../src/calendar'
 
 require('@rails/ujs').start()
 require('turbolinks').start()

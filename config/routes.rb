@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   resources :flat_templates
   resources :customers do
     patch 'update_route_flat', to: 'customers#update_route_flat', on: :member
+    resources :tasks
   end
 end
