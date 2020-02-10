@@ -1,6 +1,9 @@
 {
   "name": "libellum",
   "private": true,
+  "scripts": {
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore ./app/javascript"
+  },
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
@@ -13,7 +16,12 @@
     "popper.js": "^1.16.0"
   },
   "version": "0.1.0",
+  "prettier": "@4tw/prettier-config",
   "devDependencies": {
+    "@4tw/eslint-config": "^0.5.0",
+    "@4tw/prettier-config": "^1.0.3",
+    "eslint": "^6.8.0",
+    "prettier": "^1.19.1",
     "webpack-dev-server": "^3.9.0"
   }
 }
