@@ -8,7 +8,7 @@ environment.plugins.prepend(
     jQuery: 'jquery',
     jquery: 'jquery',
     Popper: ['popper.js', 'default'],
-  })
+  }),
 )
 
 module.exports = environment
