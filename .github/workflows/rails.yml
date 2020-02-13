@@ -73,4 +73,4 @@ jobs:
         PGUSER: postgres
         RAILS_ENV: test
       run: |
-        bundle exec rails test:system
+        for i in {1..2000}; do bundle exec rails test:system; done
