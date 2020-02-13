@@ -17,12 +17,6 @@ jobs:
           --health-retries 5
     steps:
     - uses: actions/checkout@v1
-    - uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
     - name: Get yarn cache
       id: yarn-cache
       run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -57,16 +51,6 @@ jobs:
         RAILS_ENV: test
       run: |
         bundle exec rails db:test:prepare
-    - name: Run rubocop
-      run: |
-        bundle exec rubocop
-    - name: Run ruby tests
-      env:
-        PGHOST: 127.0.0.1
-        PGUSER: postgres
-        RAILS_ENV: test
-      run: |
-        bundle exec rails test
     - name: Run system test cases
       env:
         PGHOST: 127.0.0.1

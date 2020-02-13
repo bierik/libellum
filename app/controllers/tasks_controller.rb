@@ -27,35 +27,36 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    frequency = task_params[:frequency]
-    unless Task::FREQUENCIES.flat_map(&:last).map(&:to_s).include?(frequency)
-      allowed = Task::FREQUENCIES.map(&:last).join(', ')
-      return render json: { message: "Only #{allowed} are allowed frequencies" }, status: :bad_request
-    end
-    frequency = if frequency == Task::FORT_NIGHTLY.to_s
-                  'FREQ=WEEKLY;INTERVAL=2'
-                elsif frequency.blank?
-                  'COUNT=1'
-                else
-                  "FREQ=#{frequency}"
-                end
+    raise task_params.to_unsafe_h
+    # frequency = task_params[:frequency]
+    # unless Task::FREQUENCIES.flat_map(&:last).map(&:to_s).include?(frequency)
+    #   allowed = Task::FREQUENCIES.map(&:last).join(', ')
+    #   return render json: { message: "Only #{allowed} are allowed frequencies" }, status: :bad_request
+    # end
+    # frequency = if frequency == Task::FORT_NIGHTLY.to_s
+    #               'FREQ=WEEKLY;INTERVAL=2'
+    #             elsif frequency.blank?
+    #               'COUNT=1'
+    #             else
+    #               "FREQ=#{frequency}"
+    #             end
 
-    dtstart = I18n.l(Time.zone.parse(task_params[:datetime]), format: :rrule)
+    # dtstart = I18n.l(Time.zone.parse(task_params[:datetime]), format: :rrule)
 
-    @task = @customer.tasks.new(
-      rrule: "DTSTART;TZID=#{Rails.application.config.time_zone}:#{dtstart}\n#{frequency}",
-      duration: task_params[:duration],
-      title: task_params[:title],
-      organization: current_organization,
-    )
+    # @task = @customer.tasks.new(
+    #   rrule: "DTSTART;TZID=#{Rails.application.config.time_zone}:#{dtstart}\n#{frequency}",
+    #   duration: task_params[:duration],
+    #   title: task_params[:title],
+    #   organization: current_organization,
+    # )
 
-    respond_to do |format|
-      if @task.save
-        format.json { render :show, status: :created, location: customer_task_path(@customer, @task) }
-      else
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @task.save
+    #     format.json { render :show, status: :created, location: customer_task_path(@customer, @task) }
+    #   else
+    #     raise @task.errors
+    #   end
+    # end
   end
 
   # PATCH/PUT /tasks/1
