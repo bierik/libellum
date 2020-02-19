@@ -8,4 +8,4 @@ Metrics/ClassLength:
   Enabled: false
 
 inherit_from:
-  - https://raw.githubusercontent.com/siegy22/dotfiles/47dd5ff17a2fbe600c04652f826e5011bb608fff/rubocop.yml
+  - https://raw.githubusercontent.com/siegy22/dotfiles/1a4eeb8dec27208cc3dc26c3675b5d0a49f00352/rubocop.yml
