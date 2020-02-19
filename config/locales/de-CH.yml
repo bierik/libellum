@@ -3,6 +3,7 @@ de-CH:
     models:
       flat_template: Pauschalvorlage
       customer: Kunde
+      task: Auftrag
     attributes:
       flat_template:
         name: Name
@@ -17,3 +18,11 @@ de-CH:
         distance: Distanz
         route_flat: Wegpauschale
         price_per_hour: Stundenansatz
+      task:
+        duration: Dauer
+        title: Titel
+        datetime: Zeitpunkt
+        frequency: Wiederkehrend
+  time:
+    formats:
+      rrule: "%Y%m%dT%H%M%S"

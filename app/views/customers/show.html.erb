@@ -1,0 +1,12 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1><%= @customer.full_name %></h1>
+  <%= link_to edit_customer_path(@customer), class: 'btn btn-primary' do %>
+    <%= fa_icon 'edit', text: 'Bearbeiten' %>
+  <% end %>
+</div>
+<hr />
+<%= render 'add_event_modal' %>
+<%= tag :div, id: 'calendar-root', data: {
+  'event-source': customer_tasks_path(@customer, format: :json),
+  'current-date': params['current-date'],
+} %>

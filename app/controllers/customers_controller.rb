@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: [:edit, :update, :destroy, :update_route_flat]
+  before_action :set_customer, only: [:show, :edit, :update, :destroy, :update_route_flat]
 
   # GET /customers
   # GET /customers.json
