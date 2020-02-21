@@ -19,7 +19,6 @@ organization.users.create!(
   admin: true,
   first_name: 'Beatrix',
   last_name: 'Bieri',
-  confirmed_at: Time.now
 )
 
 customer = organization.customers.create!(
