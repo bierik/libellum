@@ -12,4 +12,13 @@ class ApplicationControllerTest < ActionDispatch::IntegrationTest
     get root_path
     assert_response :found
   end
+
+  test 'user who is not in the target organization should be logged out' do
+    host! 'peter.example.com'
+    # The user jack is not in the organization peter
+    sign_in(users(:jack))
+
+    get root_path
+    assert_redirected_to new_user_session_path
+  end
 end
