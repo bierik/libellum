@@ -4,7 +4,10 @@ class ApplicationController < ActionController::Base
 
   private
   def check_organization_access
-    current_organization.users.include?(current_user)
+    if !current_organization.users.include?(current_user) && !current_user.admin?
+      sign_out(current_user)
+      redirect_to new_user_session_path
+    end
   end
 
   def current_organization
