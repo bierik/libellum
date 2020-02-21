@@ -1,17 +1,6 @@
 require_relative 'boot'
 
-require 'rails'
-# Pick the frameworks you want:
-require 'active_model/railtie'
-require 'active_job/railtie'
-require 'active_record/railtie'
-require 'active_storage/engine'
-require 'action_controller/railtie'
-require 'action_mailer/railtie'
-require 'action_mailbox/engine'
-require 'action_view/railtie'
-require 'action_cable/engine'
-require 'rails/test_unit/railtie'
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -28,5 +17,6 @@ module Libellum
     # the framework and any gems in your application.
     config.i18n.available_locales = ['de-CH']
     config.i18n.default_locale = :'de-CH'
+    config.time_zone = 'Europe/Zurich'
   end
 end

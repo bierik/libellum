@@ -1,0 +1,17 @@
+.fc-today.fc-day {
+  background-color: transparent;
+}
+
+.fc-day-header.fc-today {
+  background-color: #d1ecf1;
+}
+
+.fc-day-top.fc-today > .fc-day-number {
+  background-color: #d1ecf1;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  margin-top: 2px;
+  margin-right: 2px;
+}

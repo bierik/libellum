@@ -1,4 +1,6 @@
 ENV['RAILS_ENV'] ||= 'test'
+# Used for Capybara chrome to be in the correct timezone.
+ENV['TZ'] ||= 'Europe/Zurich'
 require_relative '../config/environment'
 require 'rails/test_help'
 

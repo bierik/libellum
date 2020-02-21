@@ -1,0 +1,24 @@
+<div class="modal" id="add-event-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <%= bootstrap_form_with(model: Task.new, url: customer_tasks_path(customer_id: @customer.id), id: 'add-event-form') do |f| %>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Auftrag hinzufügen</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <%= f.text_field :title, required: true %>
+          <%= f.text_field :datetime, required: true, class: 'datetimepicker-input', data: { toggle: 'datetimepicker', target: '#task_datetime' } %>
+          <%= f.text_field :duration, required: true, value: '01:00' %>
+          <%= f.select :frequency, Task::FREQUENCIES %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+          <%= f.submit %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

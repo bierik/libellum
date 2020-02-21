@@ -118,12 +118,13 @@ ActiveRecord::Schema.define(version: 2020_02_21_223447) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.datetime "start"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "customer_id"
-    t.datetime "end"
     t.bigint "organization_id", null: false
+    t.string "rrule"
+    t.string "duration"
+    t.string "title"
     t.index ["organization_id"], name: "index_tasks_on_organization_id"
   end
 
