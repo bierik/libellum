@@ -1,19 +1,12 @@
 import $ from 'jquery'
+import abstractDialog from './abstractDialog'
 
-const dialog = {
-  onSaveCallback: () => {},
-  onCloseCallback: () => {},
-  get el() {
-    return $('#add-event-modal')
-  },
-  modal(action) {
-    this.el.modal(action)
-  },
-  open(start, end) {
-    this.el.on('hidden.bs.modal', () => this.onCloseCallback())
+export default abstractDialog({
+  modalSelector: '#add-event-modal',
+  formSelector: '#add-event-form',
+  beforeOpen: ({ start, end }) => {
     const startDateTime = start.toLocal()
     const endDateTime = end.toLocal()
-    this.modal()
     $('#task_datetime').datetimepicker({
       locale: 'de-ch',
       stepping: 15,
@@ -28,20 +21,4 @@ const dialog = {
       .val('')
       .focus()
   },
-  close() {
-    this.el.off('hidden.bs.modal')
-    this.modal('hide')
-  },
-  onSave(fn) {
-    this.onSaveCallback = fn
-  },
-  onClose(fn) {
-    this.onCloseCallback = fn
-  },
-}
-
-$(document).on('ajax:success', '#add-event-form', (...args) => {
-  dialog.onSaveCallback(...args)
 })
-
-export default dialog

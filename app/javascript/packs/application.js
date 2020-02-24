@@ -14,6 +14,7 @@ import '@fullcalendar/daygrid/main.css'
 import '@fullcalendar/bootstrap/main.css'
 import 'tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.css'
 import '../../assets/stylesheets/calendar'
+import '../../assets/stylesheets/modal'
 
 import 'jquery'
 import '@popperjs/core'

@@ -61,7 +61,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
 
   test 'should destroy task' do
     assert_difference('Task.count', -1) do
-      delete customer_task_url(@customer, @single_task)
+      delete task_path(@single_task, format: :json)
     end
   end
 end
