@@ -21,7 +21,6 @@ class TasksController < ApplicationController
     @task = @customer.tasks.new(
       task_params.merge(organization: current_organization),
     )
-    @task.generate_rrule
     respond_to do |format|
       if @task.save
         format.json { render :show, status: :created, location: customer_task_path(@customer, @task) }

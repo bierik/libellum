@@ -18,5 +18,6 @@ module Libellum
     config.i18n.available_locales = ['de-CH']
     config.i18n.default_locale = :'de-CH'
     config.time_zone = 'Europe/Zurich'
+    config.active_record.schema_format = :sql
   end
 end

@@ -26,48 +26,37 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     get customer_tasks_url(@customer, format: :json)
     assert_response :success
     assert_equal(
-      %w[Fahrstunde Verkehrskundeunterricht],
+      %w[Fahrstunde Fahrstunde Verkehrskundeunterricht],
       response.parsed_body.map { |task| task['title'] },
     )
   end
 
   test 'should create single task' do
-    assert_create_task('',
+    assert_create_task('never',
                        'title' => 'Fahren',
                        'rrule' => "DTSTART;TZID=Europe/Zurich:20200204T000000\nCOUNT=1",
                        'duration' => '02:00',)
   end
 
   test 'should create fort nightly task' do
-    assert_create_task('FORT_NIGHTLY',
+    assert_create_task('fort_nightly',
                        'title' => 'Fahren',
                        'rrule' => "DTSTART;TZID=Europe/Zurich:20200204T000000\nFREQ=WEEKLY;INTERVAL=2",
                        'duration' => '02:00',)
   end
 
   test 'should create weekly task' do
-    assert_create_task('WEEKLY',
+    assert_create_task('weekly',
                        'title' => 'Fahren',
                        'rrule' => "DTSTART;TZID=Europe/Zurich:20200204T000000\nFREQ=WEEKLY",
                        'duration' => '02:00',)
   end
 
   test 'should create monthly task' do
-    assert_create_task('MONTHLY',
+    assert_create_task('monthly',
                        'title' => 'Fahren',
                        'rrule' => "DTSTART;TZID=Europe/Zurich:20200204T000000\nFREQ=MONTHLY",
                        'duration' => '02:00',)
-  end
-
-  test 'should throw an error for unsupported frequency' do
-    post customer_tasks_url(@customer, format: :json), params: { task: {
-      duration: '02:00',
-      title: 'Fahren',
-      datetime: Time.zone.parse('2020-02-04'),
-      frequency: 'UNSUPPORTED',
-    } }
-    assert_response :unprocessable_entity
-    assert_equal({ 'frequency' => ['ist kein gültiger Wert'] }, response.parsed_body)
   end
 
   test 'should destroy task' do
