@@ -1,32 +1,28 @@
 class Task < ApplicationRecord
-  FORT_NIGHTLY = :FORT_NIGHTLY
-  FREQUENCIES = [
-    ['Nie', ''],
-    ['Täglich', :DAILY],
-    ['Wöchentlich', :WEEKLY],
-    ['Alle zwei Wochen', FORT_NIGHTLY],
-    ['Monatlich', :MONTHLY],
-  ].freeze
+  enum frequency: { never: 'never', daily: 'daily', weekly: 'weekly', fort_nightly: 'fort_nightly', monthly: 'monthly' }
 
   include Organizationable
 
   belongs_to :customer
 
-  validates_presence_of :rrule, :duration, :title
-  validates :frequency, inclusion: { in: FREQUENCIES.map(&:last).map(&:to_s) }
-  validate :datetime do |task|
-    datetime = Time.zone.parse(@datetime)
-    raise ArgumentError if datetime.blank?
-  rescue ArgumentError
-    task.errors.add(:datetime, 'Ungültiges Datum')
+  validates_presence_of :datetime, :duration, :title
+
+  scope :ordered, -> { order(:datetime) }
+
+  def rrule
+    datetime = I18n.l(self.datetime, format: :rrule)
+    rrule_frequency = if fort_nightly?
+                        'FREQ=WEEKLY;INTERVAL=2'
+                      elsif never?
+                        'COUNT=1'
+                      else
+                        "FREQ=#{frequency.upcase}"
+                      end
+    "DTSTART;TZID=#{Rails.application.config.time_zone}:#{datetime}\n#{rrule_frequency}"
   end
 
-  scope :ordered, -> { order(:rrule) }
-
-  attr_accessor :frequency, :datetime
-
-  def generate_rrule
-    self.rrule = "DTSTART;TZID=#{Rails.application.config.time_zone}:#{rrule_datetime}\n#{rrule_frequency}"
+  def self.selectable_frequencies
+    Task.frequencies.keys.map { |frequency| [Task.human_attribute_name("frequency.#{frequency}"), frequency] }
   end
 
   def time_reported
@@ -35,19 +31,5 @@ class Task < ApplicationRecord
 
   def report_price
     (time_reported / (60 * 60)) * customer.price_per_hour
-  end
-
-  def rrule_frequency
-    if frequency == Task::FORT_NIGHTLY.to_s
-      'FREQ=WEEKLY;INTERVAL=2'
-    elsif frequency.blank?
-      'COUNT=1'
-    else
-      "FREQ=#{frequency}"
-    end
-  end
-
-  def rrule_datetime
-    I18n.l(Time.zone.parse(datetime), format: :rrule)
   end
 end

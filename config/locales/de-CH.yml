@@ -23,6 +23,12 @@ de-CH:
         title: Titel
         datetime: Zeitpunkt
         frequency: Wiederkehrend
+      task/frequency:
+        never: Nie
+        daily: Täglich
+        weekly: Wöchentlich
+        fort_nightly: Alle zwei Wochen
+        monthly: Monatlich
   time:
     formats:
       rrule: "%Y%m%dT%H%M%S"

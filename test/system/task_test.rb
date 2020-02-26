@@ -19,11 +19,16 @@ class TaskTest < ApplicationSystemTestCase
     click_on('Auftrag erstellen')
     find('.fc-event .fc-time > span', text: '14:00 - 16:00')
 
-    assert_equal all('.fc-event .fc-time > span').map(&:text), [
+    assert_equal [
+      '8:00 - 10:00',
       '8:00 - 10:00',
       '12:00 - 14:00',
+      '12:00 - 14:00',
       '14:00 - 16:00',
-    ]
+      '12:00 - 14:00',
+      '12:00 - 14:00',
+      '12:00 - 14:00',
+    ], all('.fc-event .fc-time > span').map(&:text)
   end
 
   test 'creates event in calendar in month view' do

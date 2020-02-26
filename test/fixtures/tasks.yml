@@ -1,17 +1,23 @@
 weekly_recurring:
   organization: fahrlehrer_peter
   customer: heidi
-  rrule: |
-    DTSTART;TZID=Europe/Zurich:20200101T080000
-    FREQ=WEEKLY
+  datetime: <%= Time.zone.parse("2020-01-01T08:00:00") %>
+  frequency: weekly
+  duration: '02:00'
+  title: Fahrstunde
+
+fort_nightly_recurring:
+  organization: fahrlehrer_peter
+  customer: heidi
+  datetime: <%= Time.zone.parse("2020-01-01T08:00:00") %>
+  frequency: fort_nightly
   duration: '02:00'
   title: Fahrstunde
 
 single:
   organization: fahrlehrer_peter
   customer: heidi
-  rrule: |
-    DTSTART;TZID=Europe/Zurich:20200101T120000
-    COUNT=1
+  datetime: <%= Time.zone.parse("2020-01-01T12:00:00") %>
+  frequency: daily
   duration: '02:00'
   title: Verkehrskundeunterricht

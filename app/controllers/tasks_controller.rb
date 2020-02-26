@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  before_action :set_customer
+  before_action :set_customer, except: [:update, :destroy]
 
   # GET /tasks
   # GET /tasks.json
@@ -12,19 +12,15 @@ class TasksController < ApplicationController
              end
   end
 
-  # GET /tasks/1/edit
-  def edit; end
-
   # POST /tasks
   # POST /tasks.json
   def create
     @task = @customer.tasks.new(
       task_params.merge(organization: current_organization),
     )
-    @task.generate_rrule
     respond_to do |format|
       if @task.save
-        format.json { render :show, status: :created, location: customer_task_path(@customer, @task) }
+        format.json { render :show, status: :created }
       else
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
@@ -36,10 +32,8 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Auftrag wurde erfolgreich aktualisiert' }
-        format.json { render :show, status: :ok, location: customer_task_path(@customer, @task) }
+        format.json { render json: @task, status: :ok }
       else
-        format.html { render :edit }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -50,7 +44,6 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to @customer, notice: 'Auftrag wurde erfolgreich gelöscht' }
       format.json { head :no_content }
     end
   end
