@@ -1,11 +1,16 @@
 peter:
   email: peter.mueller@example.org
   encrypted_password: <%= User.new.send(:password_digest, 'fahrschule123') %>
-  confirmed_at: 2000-01-01
   organizations:
     - fahrlehrer_peter
 
 jack:
   email: jack.sparrow@example.org
   encrypted_password: <%= User.new.send(:password_digest, 'black-pearl-123') %>
-  confirmed_at: 2000-01-01
+
+admin:
+  first_name: The
+  last_name: Admin
+  email: admin@example.org
+  encrypted_password: <%= User.new.send(:password_digest, 'admin') %>
+  admin: true

@@ -22,6 +22,9 @@
         <ul class="navbar-nav mr-auto">
           <%= nav_bar_link 'Pauschalvorlagen', flat_templates_path, 'flat_templates'  %>
           <%= nav_bar_link 'Kunden', customers_path, 'customers'  %>
+          <% if current_user&.admin %>
+            <%= nav_bar_link 'Benutzer einladen', new_user_invitation_path, 'invitations'  %>
+          <% end %>
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
