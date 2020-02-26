@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   def self.find_for_authentication(warden_conditions)
     organization = Organization.find_by!(handle: warden_conditions[:subdomain])
-    organization.users.where(email: warden_conditions[:email]).first
+    organization.users.where(email: warden_conditions[:email]).first ||
+      where(email: warden_conditions[:email], admin: true).first
   end
 end
