@@ -26,6 +26,7 @@ class ApplicationController < ActionController::Base
   def current_organization
     @current_organization ||= Organization.find_by!(handle: request.subdomain)
   end
+  helper_method :current_organization
 
   def current_context; end
   helper_method :current_context

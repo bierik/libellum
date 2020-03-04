@@ -1,0 +1,158 @@
+// Variables
+//
+// Variables should follow the `$component-state-property-size` formula for
+// consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
+
+// Color system
+
+$white:    #FFF !default;
+$gray-100: #FAFBFE !default;
+$gray-200: #EFF2F7 !default;
+$gray-300: #E5E9F2 !default;
+$gray-400: #E0E6ED !default;
+$gray-500: #D3DCE6 !default;
+$gray-600: #C0CCDA !default;
+$gray-700: #8492A6 !default;    // Used for text color
+$gray-800: #3C4858 !default;    // Used for headings color
+$gray-900: #273444 !default;
+$black:    #1F2D3D !default;
+
+$grays: () !default;
+$grays: map-merge((
+  "100": $gray-100,
+  "200": $gray-200,
+  "300": $gray-300,
+  "400": $gray-400,
+  "500": $gray-500,
+  "600": $gray-600,
+  "700": $gray-700,
+  "800": $gray-800,
+  "900": $gray-900
+), $grays) !default;
+
+$blue:    #2684FF !default;
+$indigo:  #6e00ff !default;
+$purple:  #510FA8 !default;
+$pink:    #f074ad !default;
+$red:     #FF5630 !default;
+$orange:  #FFAB00 !default;
+$yellow:  #ffcc00 !default;
+$green:   #36B37E !default;
+$teal:    #00B8D9 !default;
+$cyan:    #4bd6e5 !default;
+
+$colors: () !default;
+$colors: map-merge((
+  "blue":       $blue,
+  "indigo":     $indigo,
+  "purple":     $purple,
+  "pink":       $pink,
+  "red":        $red,
+  "orange":     $orange,
+  "yellow":     $yellow,
+  "green":      $green,
+  "teal":       $teal,
+  "cyan":       $cyan,
+  "white":      $white,
+  "gray":       $gray-600,
+  "gray-dark":  $gray-800
+), $colors);
+
+$primary:       $indigo !default;
+$secondary:     $gray-200 !default;
+$neutral:       $white !default;
+$success:       $green !default;
+$info:          $teal !default;
+$warning:       $orange !default;
+$danger:        $red !default;
+$light:         $gray-200 !default;
+$dark:          $gray-900 !default;
+
+$theme-colors: () !default;
+$theme-colors: map-merge((
+    "primary":      $primary,
+    "secondary":    $secondary,
+    "neutral":      $neutral,
+    "success":      $success,
+    "info":         $teal,
+    "warning":      $warning,
+    "danger":       $danger,
+    "white":        $white,
+    "light":        $light,
+    "dark":         $dark
+), $theme-colors);
+
+$facebook:      #3b5999 !default;
+$twitter:       #1da1f2 !default;
+$google-plus:   #dd4b39 !default;
+$instagram:     #e4405f !default;
+$pinterest:     #bd081c !default;
+$youtube:       #cd201f !default;
+$slack:         #3aaf85 !default;
+$dribbble:      #ea4c89 !default;
+$github:        #222222 !default;
+$vimeo:         #04A0F0 !default;
+
+$brand-colors: () !default;
+$brand-colors: map-merge((
+    "facebook":     $facebook,
+    "twitter":      $twitter,
+    "google-plus":  $google-plus,
+    "instagram":    $instagram,
+    "pinterest":    $pinterest,
+    "youtube":      $youtube,
+    "slack":        $slack,
+    "dribbble":     $dribbble,
+    "github":       $github,
+    "vimeo":        $vimeo
+), $brand-colors);
+
+$svg-colors: () !default;
+$svg-colors: map-merge((
+  "primary":        $primary,
+  "primary-100":    #F3EBFF,
+  "primary-200":    #E8D6FF,
+  "primary-300":    #D1ADFF,
+  "primary-400":    #C599FF,
+  "primary-500":    #AE70FF,
+  "neutral":    $white,
+
+), $svg-colors);
+
+// Translucent color opacity
+$translucent-color-opacity: .6 !default;
+
+// Set a specific jump point for requesting color jumps
+$theme-color-interval:      8% !default;
+
+// The yiq lightness value that determines when the lightness of color changes from "dark" to "light". Acceptable values are between 0 and 255.
+$yiq-contrasted-threshold:  180 !default;
+
+// Customize the light and dark text colors for use in our YIQ color contrast function.
+$yiq-text-dark:             $gray-900 !default;
+$yiq-text-light:            $white !default;
+
+// Action colors
+
+$star-rating-color:         $gray-400 !default;
+$star-rating-color-active:  $yellow !default;
+
+$favorite-color:            $yellow !default;
+$like-color:                $blue !default;
+$love-color:                $red !default;
+
+// Body
+
+$body-bg:       $white !default;
+$body-color:    $gray-700 !default;
+
+
+// Sections
+
+$section-colors: () !default;
+$section-colors: map-merge((
+  "primary":      $body-bg,
+  "secondary":    $gray-100,
+  "light":        $gray-400,
+  "dark":         darken($dark, 7%)
+), $section-colors);

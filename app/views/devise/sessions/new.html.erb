@@ -1,0 +1,60 @@
+<div class="main-content">
+  <section class="slice slice-lg min-vh-100 d-flex align-items-center bg-section-secondary">
+    <div class="bg-absolute-cover bg-size--contain d-none d-lg-block">
+      <figure class="w-100">
+        <%= inline_svg_pack_tag('media/backgrounds/bg-3.svg') %>
+      </figure>
+    </div>
+    <div class="container py-5 px-md-0 d-flex align-items-center">
+      <div class="w-100">
+        <div class="row row-grid justify-content-center justify-content-lg-between align-items-center">
+          <div class="col-sm-8 col-lg-6 col-xl-5 order-lg-2">
+            <div class="card shadow zindex-100 mb-0">
+              <div class="card-body px-md-5 py-5">
+                <div class="mb-4">
+                  <h6 class="h3"><%= t('.sign_in') %></h6>
+                  <% if flash[:notice] %>
+                    <span class="text-info"><%= flash[:notice] %></span>
+                  <% end %>
+                  <% if flash[:alert] %>
+                    <span class="text-danger"><%= flash[:alert] %></span>
+                  <% end %>
+                </div>
+                <span class="clearfix"></span>
+                <%= bootstrap_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                  <%= f.email_field :email, required: true, autofocus: true, autocomplete: "email", placeholder: 'name@example.org', prepend: fa_icon('user', style: 'width: 16px'), label_class: 'form-control-label' %>
+
+
+                  <%= f.form_group :password do %>
+                    <div class="d-flex align-items-center justify-content-between">
+                      <div>
+                        <label class="form-control-label">Password</label>
+                      </div>
+                      <div class="mb-2">
+                        <%= link_to t("devise.shared.links.forgot_your_password"), new_password_path(resource_name), class: 'small text-muted text-underline--dashed border-primary', tabindex: '-1' %>
+                      </div>
+                    </div>
+                    <%= f.password_field :password, required: true, autocomplete: "current-password", prepend: fa_icon('key'), hide_label: true, placeholder: t('activerecord.attributes.user.password') %>
+                  <% end %>
+
+
+                  <%= f.check_box :remember_me, custom: true %>
+
+                  <div class="mt-4">
+                    <button type="submit" class="btn btn-sm btn-primary btn-icon rounded-pill">
+                      <span class="btn-inner--text"><%= t('.sign_in') %></span>
+                      <span class="btn-inner--icon"><i class="fas fa-long-arrow-alt-right"></i></span>
+                    </button>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5 order-lg-1 d-none d-lg-block">
+            <h1 class="display-2 text-center"><%= current_organization.name %></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
