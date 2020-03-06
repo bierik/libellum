@@ -127,6 +127,9 @@ GEM
     httpclient (2.8.3)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
+    inline_svg (1.7.0)
+      activesupport (>= 3.0)
+      nokogiri (>= 1.6)
     jaro_winkler (1.5.4)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
@@ -283,6 +286,7 @@ DEPENDENCIES
   devise_invitable
   font-awesome-rails
   google-maps
+  inline_svg
   jbuilder (~> 2.7)
   listen
   pg (>= 0.18, < 2.0)

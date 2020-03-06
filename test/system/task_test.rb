@@ -7,10 +7,10 @@ class TaskTest < ApplicationSystemTestCase
 
   test 'creates event in calendar' do
     visit customer_path(@customer, 'current-date': '2020-01-01T08:00')
-    find('.fc-slats tbody > tr:nth-child(17) > td:nth-child(2)').click
+    find('[data-time="08:00:00"] > td:nth-child(2)').click
 
     assert_equal '02.01.2020 08:00', find_field('Zeitpunkt').value
-    assert_equal '00:30', find_field('Dauer').value
+    assert_equal '00:15', find_field('Dauer').value
 
     fill_in 'Titel', with: 'Hauswirtschaft'
     fill_in 'Zeitpunkt', with: '02.01.2020 14:00'

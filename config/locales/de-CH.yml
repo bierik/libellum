@@ -30,12 +30,6 @@ de-CH:
         weekly: Wöchentlich
         fort_nightly: Alle zwei Wochen
         monthly: Monatlich
-      user:
-        first_name: Vorname
-        last_name: Nachname
-        email: E-Mail
-        password: Passwort
-        password_confirmation: Passwort-Bestätigung
   time:
     formats:
       rrule: "%Y%m%dT%H%M%S"

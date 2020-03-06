@@ -48,7 +48,6 @@ const config = {
   plugins: [timeGridPlugin, rrulePlugin, interactionPlugin, listPlugin, dayGridPlugin, bootstrap],
   themeSystem: 'bootstrap',
   locale,
-  defaultView: 'timeGridWeek',
   displayEventEnd: true,
   nowIndicator: true,
   weekNumbers: true,
@@ -68,6 +67,18 @@ const config = {
     EditTaskDialog.open(event)
   },
   defaultDate: new URLSearchParams(document.location.search).get('current-date') || DateTime.local().toISODate(),
+  slotDuration: '00:15:00',
+  scrollTime: '08:00:00',
+  businessHours: {
+    // days of week. an array of zero-based day of week integers (0=Sunday)
+    daysOfWeek: [1, 2, 3, 4, 5], // Monday - Friday
+    startTime: '08:00',
+    endTime: '18:00',
+  },
+  defaultView: localStorage.getItem('fcDefaultView') !== null ? localStorage.getItem('fcDefaultView') : 'timeGridWeek',
+  datesRender({ view }) {
+    localStorage.setItem('fcDefaultView', view.type)
+  },
 }
 
 function destroyCalendar() {

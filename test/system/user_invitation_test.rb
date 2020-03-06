@@ -32,7 +32,7 @@ class UserInvitationTest < ApplicationSystemTestCase
     find('h2', text: 'Setze ein Passwort')
 
     fill_in 'Passwort', with: 'hogwarts'
-    fill_in 'Passwort-Bestätigung', with: 'hogwarts'
+    fill_in 'Passwortbestätigung', with: 'hogwarts'
     click_on 'Passwort setzen'
 
     assert_equal "Dein Passwort wurde gesetzt. Du bist nun angemeldet.\n×", find('.alert').text

@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   root 'flat_templates#index'
 
-  devise_for :users, controllers: { invitations: 'users/invitations' }
+  devise_for :users, controllers: {
+    invitations: 'users/invitations',
+    passwords: 'users/passwords',
+    sessions: 'users/sessions',
+  }
 
   resources :flat_templates
   resources :customers do

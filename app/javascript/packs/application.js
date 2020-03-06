@@ -15,12 +15,14 @@ import '@fullcalendar/bootstrap/main.css'
 import 'tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.css'
 import '../../assets/stylesheets/calendar'
 import '../../assets/stylesheets/modal'
+import '../../../vendor/assets/purpose/css/purpose'
 
 import 'jquery'
 import '@popperjs/core'
 import 'bootstrap'
 import 'tempusdominus-bootstrap-4'
 import '../src/calendar'
+import '../../../vendor/assets/purpose/js/purpose'
 import { Settings } from 'luxon'
 
 Settings.defaultLocale = 'de-CH'
@@ -34,5 +36,5 @@ require('channels')
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
 //
-// const images = require.context('../images', true)
+require.context('../../../vendor/assets/purpose/img/svg', true)
 // const imagePath = (name) => images(name, true)
