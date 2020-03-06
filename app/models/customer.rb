@@ -7,6 +7,7 @@ class Customer < ApplicationRecord
   has_many :invoices, dependent: :destroy
 
   validates_presence_of :first_name, :last_name, :street, :number, :place, :zip
+  validates :color, length: { is: 7 }
 
   scope :ordered, -> { order(:last_name, :first_name) }
 
@@ -36,6 +37,10 @@ class Customer < ApplicationRecord
 
   def full_name
     [first_name, last_name].join(' ')
+  end
+
+  def bright_color?
+    @bright_color ||= Color::RGB.by_hex(color).brightness > 0.7
   end
 
   private

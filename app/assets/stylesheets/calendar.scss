@@ -21,3 +21,11 @@
 .fc-event, .fc-event-dot {
   background-color: $blue;
 }
+
+.fc-event {
+  padding: 2px;
+}
+
+.fc-list-table td {
+  vertical-align: middle !important;
+}

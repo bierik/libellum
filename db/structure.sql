@@ -123,7 +123,8 @@ CREATE TABLE public.customers (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     price_per_hour numeric DEFAULT 50.0,
-    organization_id bigint NOT NULL
+    organization_id bigint NOT NULL,
+    color character varying DEFAULT '#000000'::character varying NOT NULL
 );
 
 
@@ -773,6 +774,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200204143620'),
 ('20200221223447'),
 ('20200221230000'),
-('20200224131726');
+('20200224131726'),
+('20200306210911');
 
 

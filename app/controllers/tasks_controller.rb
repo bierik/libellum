@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  before_action :set_customer, except: [:update, :destroy]
+  before_action :set_customer, except: [:update, :destroy, :index]
 
   # GET /tasks
   # GET /tasks.json
@@ -8,7 +8,7 @@ class TasksController < ApplicationController
     @tasks = if params.key? :customer_id
                current_organization.customers.find(params[:customer_id]).tasks.ordered
              else
-               current_organization.tasks.ordered
+               current_organization.tasks.preload(:customer).ordered
              end
   end
 

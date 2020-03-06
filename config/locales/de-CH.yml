@@ -19,6 +19,7 @@ de-CH:
         distance: Distanz
         route_flat: Wegpauschale
         price_per_hour: Stundenansatz
+        color: Farbe
       task:
         duration: Dauer
         title: Titel

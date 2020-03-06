@@ -35,7 +35,7 @@ class UserInvitationTest < ApplicationSystemTestCase
     fill_in 'Passwortbestätigung', with: 'hogwarts'
     click_on 'Passwort setzen'
 
-    assert_equal "Dein Passwort wurde gesetzt. Du bist nun angemeldet.\n×", find('.alert').text
+    assert_equal "Dein Passwort wurde gesetzt. Du bist nun angemeldet.\n×", find('div.alert').text
 
     assert invited_user.reload.invitation_accepted_at
   end

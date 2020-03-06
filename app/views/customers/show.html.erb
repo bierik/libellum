@@ -7,7 +7,7 @@
 <hr />
 <%= render 'add_event_modal' %>
 <%= render 'edit_event_modal' %>
-<%= tag :div, id: 'calendar-root', data: {
+<%= tag :div, id: 'calendar-customer-root', data: {
   'event-source': customer_tasks_path(@customer, format: :json),
   'current-date': params['current-date'],
 } %>

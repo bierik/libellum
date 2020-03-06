@@ -14,6 +14,7 @@ class CustomersController < ApplicationController
   # GET /cusotmers/new
   def new
     @customer = current_organization.customers.new
+    @customer.color = "##{Random.bytes(3).unpack1('H*')}"
   end
 
   # GET /customer/1/edit
@@ -83,6 +84,7 @@ class CustomersController < ApplicationController
       :zip,
       :route_flat,
       :price_per_hour,
+      :color,
     )
   end
 
