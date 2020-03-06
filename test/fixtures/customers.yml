@@ -6,3 +6,14 @@ heidi:
   place: Wilderswil
   zip: 3812
   organization: fahrlehrer_peter
+  color: '#ffcc00'
+
+housi:
+  first_name: Housi
+  last_name: Büthikofer
+  street: Gartenstrasse
+  number: 12
+  place: Unterseen
+  zip: 3805
+  organization: fahrlehrer_peter
+  color: '#444444'

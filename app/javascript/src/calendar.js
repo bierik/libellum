@@ -7,6 +7,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import listPlugin from '@fullcalendar/list'
 import bootstrap from '@fullcalendar/bootstrap'
 import { DateTime } from 'luxon'
+import $ from 'jquery'
 import api from '../src/api'
 import AddTaskDialog from './addTaskDialog'
 import EditTaskDialog from './editTaskDialog'
@@ -44,41 +45,45 @@ async function editTask({ event: { start, end, title, url }, revert }) {
   }
 }
 
-const config = {
-  plugins: [timeGridPlugin, rrulePlugin, interactionPlugin, listPlugin, dayGridPlugin, bootstrap],
-  themeSystem: 'bootstrap',
-  locale,
-  displayEventEnd: true,
-  nowIndicator: true,
-  weekNumbers: true,
-  selectable: true,
-  editable: true,
-  allDaySlot: false,
-  header: {
-    left: 'today prev,next',
-    center: 'title',
-    right: 'dayGridMonth,timeGridWeek,listMonth',
-  },
-  select: createTask,
-  eventDrop: editTask,
-  eventResize: editTask,
-  eventClick: ({ jsEvent, event }) => {
-    jsEvent.preventDefault()
-    EditTaskDialog.open(event)
-  },
-  defaultDate: new URLSearchParams(document.location.search).get('current-date') || DateTime.local().toISODate(),
-  slotDuration: '00:15:00',
-  scrollTime: '08:00:00',
-  businessHours: {
-    // days of week. an array of zero-based day of week integers (0=Sunday)
-    daysOfWeek: [1, 2, 3, 4, 5], // Monday - Friday
-    startTime: '08:00',
-    endTime: '18:00',
-  },
-  defaultView: localStorage.getItem('fcDefaultView') !== null ? localStorage.getItem('fcDefaultView') : 'timeGridWeek',
-  datesRender({ view }) {
-    localStorage.setItem('fcDefaultView', view.type)
-  },
+function createConfig(eventRender = () => {}) {
+  return {
+    plugins: [timeGridPlugin, rrulePlugin, interactionPlugin, listPlugin, dayGridPlugin, bootstrap],
+    themeSystem: 'bootstrap',
+    locale,
+    displayEventEnd: true,
+    nowIndicator: true,
+    weekNumbers: true,
+    selectable: true,
+    editable: true,
+    allDaySlot: false,
+    header: {
+      left: 'today prev,next',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,listMonth',
+    },
+    select: createTask,
+    eventDrop: editTask,
+    eventResize: editTask,
+    eventClick: ({ jsEvent, event }) => {
+      jsEvent.preventDefault()
+      EditTaskDialog.open(event)
+    },
+    defaultDate: new URLSearchParams(document.location.search).get('current-date') || DateTime.local().toISODate(),
+    slotDuration: '00:15:00',
+    scrollTime: '08:00:00',
+    businessHours: {
+      // days of week. an array of zero-based day of week integers (0=Sunday)
+      daysOfWeek: [1, 2, 3, 4, 5], // Monday - Friday
+      startTime: '08:00',
+      endTime: '18:00',
+    },
+    defaultView:
+      localStorage.getItem('fcDefaultView') !== null ? localStorage.getItem('fcDefaultView') : 'timeGridWeek',
+    datesRender({ view }) {
+      localStorage.setItem('fcDefaultView', view.type)
+    },
+    eventRender,
+  }
 }
 
 function destroyCalendar() {
@@ -86,10 +91,10 @@ function destroyCalendar() {
   cal.destroy()
 }
 
-function initCalendar() {
-  const root = document.getElementById('calendar-root')
+function initCalendar(selector, eventRender = () => {}) {
+  const root = document.getElementById(selector)
   if (!root) return
-  cal = new Calendar(root, config)
+  cal = new Calendar(root, createConfig(eventRender))
   cal.addEventSource(root.dataset.eventSource)
   window.requestAnimationFrame(() => cal.render())
 }
@@ -116,7 +121,33 @@ EditTaskDialog.onDelete(() => {
   cal.refetchEvents()
 })
 
-document.addEventListener('turbolinks:load', initCalendar)
+document.addEventListener('turbolinks:load', () => initCalendar('calendar-customer-root'))
+document.addEventListener('turbolinks:load', () =>
+  initCalendar(
+    'calendar-dashboard-root',
+    ({
+      event: {
+        extendedProps: { customer, brightColor },
+      },
+      el,
+      view: { type },
+    }) => {
+      const customerEl = $('<em>')
+        .addClass('small d-block')
+        .text(customer)
+      if (type !== 'listMonth') {
+        if (brightColor) {
+          $(el).addClass('text-dark')
+        }
+      }
+      if (type === 'timeGridWeek') {
+        $('.fc-title', el).append(customerEl)
+      } else if (type === 'listMonth') {
+        $('.fc-list-item-title', el).append(customerEl)
+      }
+    },
+  ),
+)
 
 document.addEventListener('turbolinks:before-cache', () => {
   AddTaskDialog.close()

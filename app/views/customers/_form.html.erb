@@ -13,6 +13,7 @@
     <% else %>
       <%= f.text_field :route_flat, append: link_to("berechnen", update_route_flat_customer_path(@customer), method: :patch, class: "btn btn-secondary"), wrapper: { class: 'col-md-6' } %>
     <% end %>
+    <%= f.color_field :color, wrapper: { class: 'col-md-6' } %>
   </div>
   <%= f.submit %>
 <% end %>

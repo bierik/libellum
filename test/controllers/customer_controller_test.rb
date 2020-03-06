@@ -52,4 +52,9 @@ class CustomerControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to customers_url
   end
+
+  test 'calculate brightness of color' do
+    assert customers(:heidi).bright_color?
+    assert_not customers(:housi).bright_color?
+  end
 end

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'flat_templates#index'
+  root 'dashboard#index'
 
   devise_for :users, controllers: {
     invitations: 'users/invitations',
@@ -12,5 +12,5 @@ Rails.application.routes.draw do
     patch 'update_route_flat', to: 'customers#update_route_flat', on: :member
     resources :tasks, except: [:update, :destroy, :show]
   end
-  resources :tasks, only: [:update, :destroy]
+  resources :tasks, only: [:update, :destroy, :index]
 end

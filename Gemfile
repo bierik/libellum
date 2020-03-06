@@ -30,6 +30,7 @@ gem 'airbrake'
 gem 'aws-sdk-s3', require: false
 gem 'barnes'
 gem 'bootstrap_form', '~> 4.3'
+gem 'color'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise_invitable'
