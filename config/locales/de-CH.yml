@@ -1,10 +1,18 @@
 de-CH:
   activerecord:
     models:
-      flat_template: Pauschalvorlage
-      customer: Kunde
-      task: Auftrag
-      user: Benutzer
+      flat_template:
+        one: Pauschalvorlage
+        other: Pauschalvorlagen
+      customer:
+        one: Kunde
+        other: Kunden
+      task:
+        one: Auftrag
+        other: Aufträge
+      user:
+        one: Benutzer
+        other: Benutzer
     attributes:
       flat_template:
         name: Name

@@ -1,9 +1,17 @@
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h1>Kunden</h1>
-  <%= link_to new_customer_path, class: 'btn btn-primary' do %>
-    <%= fa_icon 'plus', text: 'Hinzufügen' %>
+<% content_for(:header_title) do %>
+  <%= Customer.model_name.human(count: :many) %>
+<% end %>
+
+<% content_for(:header_subtitle) do %>
+  Sie verwalten zur Zeit <%= @current_organization.customers.count %> <%= Customer.model_name.human(count: @current_organization.customers.count) %>
+<% end %>
+
+<% content_for(:header_actions) do %>
+  <%= link_to new_customer_path, class: 'btn btn-icon btn-group-nav shadow btn-neutral' do %>
+    <span class="btn-inner--icon"><%= fa_icon 'plus' %></span>
+    <span class="btn-inner--text d-none d-md-inline-block">Hinzufügen</span>
   <% end %>
-</div>
+<% end %>
 
 <div class="list-group">
   <% @customers.each do |customer| %>

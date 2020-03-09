@@ -7,6 +7,6 @@ class FlatTemplatesTest < ApplicationSystemTestCase
 
   test 'visiting the index' do
     visit flat_templates_path
-    assert_selector 'h1', text: 'Pauschalvorlagen'
+    assert_selector '.h2', text: 'Pauschalvorlagen'
   end
 end

@@ -1,9 +1,14 @@
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h1>Pauschalvorlagen</h1>
-  <%= link_to new_flat_template_path, class: 'btn btn-primary' do %>
-    <%= fa_icon 'plus', text: 'Hinzufügen' %>
+<% content_for(:header_title) do %>
+  <%= FlatTemplate.model_name.human(count: :many) %>
+<% end %>
+
+
+<% content_for(:header_actions) do %>
+  <%= link_to new_flat_template_path, class: 'btn btn-icon btn-group-nav shadow btn-neutral' do %>
+    <span class="btn-inner--icon"><%= fa_icon 'plus' %></span>
+    <span class="btn-inner--text d-none d-md-inline-block">Hinzufügen</span>
   <% end %>
-</div>
+<% end %>
 
 <div class="list-group">
   <% @flat_templates.each do |flat_template| %>

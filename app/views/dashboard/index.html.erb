@@ -1,7 +1,7 @@
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h1>Dashboard</h1>
-</div>
-<hr />
+<% content_for(:header_title) do %>
+  Übersicht
+<% end %>
+
 <%= tag :div, id: 'calendar-dashboard-root', data: {
   'event-source': tasks_path(format: :json),
   'current-date': params['current-date'],

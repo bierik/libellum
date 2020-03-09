@@ -1,4 +1,10 @@
-<h2><%= t "devise.invitations.new.header" %></h2>
+<% content_for(:header_title) do %>
+  <%= t "devise.invitations.new.header" %>
+<% end %>
+
+<% content_for(:header_subtitle) do %>
+  Laden Sie einen neuen Benutzer in Ihre Organisation ein.
+<% end %>
 
 <%= bootstrap_form_for(resource, as: resource_name, url: invitation_path(resource_name), method: :post) do |f| %>
   <div class="row" style="max-width: 500px">
