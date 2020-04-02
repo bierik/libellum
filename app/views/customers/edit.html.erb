@@ -1,3 +1,10 @@
-<h1>Kunde bearbeiten</h1>
+<% content_for(:header_title) do %>
+  <em><%= @customer.full_name %></em> bearbeiten
+<% end %>
+
+<% content_for(:header_subtitle) do %>
+  Bearbeiten Sie hier den Kunden. Durch einen Klick auf <em>berechnen</em>, wird die Wegpauschale anhand der Adresse
+  neu berechnet.
+<% end %>
 
 <%= render 'form', customer: @customer %>

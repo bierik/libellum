@@ -12,28 +12,79 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-      <%= link_to 'Libellum', root_path, class: 'navbar-brand' %>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <div id="navbar-top-main" class="navbar-top navbar-dark bg-primary border-bottom">
+      <div class="container px-md-0">
+        <div class="navbar-nav align-items-center">
+          <div class="d-lg-inline-block">
+            <span class="navbar-text mr-3">Libellum</span>
+          </div>
 
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <%= nav_bar_link 'Pauschalvorlagen', flat_templates_path, 'flat_templates'  %>
-          <%= nav_bar_link 'Kunden', customers_path, 'customers'  %>
-          <% if current_user&.admin %>
-            <%= nav_bar_link 'Benutzer einladen', new_user_invitation_path, 'invitations'  %>
-          <% end %>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+          <div class="ml-auto">
+            <ul class="nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link pr-0" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <%= fa_icon 'user-circle', class: 'fa-lg' %>
+                </a>
+                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(29px, 39px, 0px);">
+                  <%= link_to('#', class: 'dropdown-item') do %>
+                    <%= fa_icon 'user' %> Profil
+                  <% end %>
+                  <%= link_to('#', class: 'dropdown-item') do %>
+                    <%= fa_icon 'cog' %> Einstellungen
+                  <% end %>
+                  <div class="dropdown-divider" role="presentation"></div>
+                  <%= link_to(destroy_user_session_path, method: :delete, class: 'dropdown-item') do %>
+                    <%= fa_icon 'sign-out-alt' %> Abmelden
+                  <% end %>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-main navbar-expand-lg navbar-dark bg-primary" id="navbar-main">
+      <div class="container px-lg-0">
+        <%= link_to current_organization.name, root_path, class: 'navbar-brand mr-lg-5' %>
+        <button class="navbar-toggler pr-0 collapsed" type="button" data-toggle="collapse" data-target="#navbar-main-collapse" aria-controls="navbar-main-collapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbar-main-collapse" style="">
+          <ul class="navbar-nav align-items-lg-center">
+            <%= nav_bar_link 'Kunden', customers_path, 'customers'  %>
+            <%= nav_bar_link 'Pauschalvorlagen', flat_templates_path, 'flat_templates'  %>
+            <% if current_user&.admin %>
+              <%= nav_bar_link 'Benutzer einladen', new_user_invitation_path, 'invitations'  %>
+            <% end %>
+          </ul>
+
+        </div>
       </div>
     </nav>
+    <section class="bg-primary d-flex align-items-end header-account-page">
+      <div class="container pt-4 pt-lg-0">
+        <div class="row">
+          <div class=" col-lg-12">
+            <div class="row align-items-center mb-4">
+              <div class="col-md-8 mb-4 mb-md-0">
+                <span class="h2 mb-0 text-white d-block">
+                  <%= yield(:header_title) %>
+                </span>
+                <span class="text-white d-none d-md-inline">
+                  <%= yield(:header_subtitle) %>
+                </span>
+              </div>
+            </div>
 
-    <main role="main" class="container pt-4">
+            <div class="d-flex" style="min-height: 50px;">
+              <%= yield(:header_actions) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+    <main role="main" class="container pt-5">
       <% flash.each do |key, value| %>
         <div class="alert alert-info fade show">
           <%= value %>
@@ -45,5 +96,4 @@
       <%= yield %>
     </main>
   </body>
-
 </html>

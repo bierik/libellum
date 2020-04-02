@@ -1,3 +1,9 @@
-<h1>Neue <%= FlatTemplate.model_name.human %></h1>
+<% content_for(:header_title) do %>
+  <%= FlatTemplate.model_name.human %> hinzufügen
+<% end %>
+
+<% content_for(:header_subtitle) do %>
+  Fügt eine neue Pauschalvorge hinzu. Diese kann später beim Erstellen einer Rechung als pauschale Position wiederverwendet werden.
+<% end %>
 
 <%= render 'form', flat_template: @flat_template %>

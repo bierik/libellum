@@ -1,10 +1,20 @@
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h1><%= @customer.full_name %></h1>
-  <%= link_to edit_customer_path(@customer), class: 'btn btn-primary' do %>
-    <%= fa_icon 'edit', text: 'Bearbeiten' %>
+<% content_for(:header_title) do %>
+  <%= @customer.full_name %>
+<% end %>
+
+<% content_for(:header_subtitle) do %>
+  <%= @customer.street %> <%= @customer.number %><br>
+  <%= @customer.place %>
+<% end %>
+
+
+<% content_for(:header_actions) do %>
+  <%= link_to edit_customer_path(@customer), class: 'btn btn-icon btn-group-nav shadow btn-neutral' do %>
+    <span class="btn-inner--icon"><%= fa_icon 'edit' %></span>
+    <span class="btn-inner--text d-none d-md-inline-block">Bearbeiten</span>
   <% end %>
-</div>
-<hr />
+<% end %>
+
 <%= render 'add_event_modal' %>
 <%= render 'edit_event_modal' %>
 <%= tag :div, id: 'calendar-customer-root', data: {

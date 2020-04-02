@@ -1,3 +1,9 @@
-<h1>Pauschalvorlage bearbeiten</h1>
+<% content_for(:header_title) do %>
+  <em><%= @flat_template.name %></em> bearbeiten
+<% end %>
+
+<% content_for(:header_subtitle) do %>
+  Bearbeiten Sie hier die Pauschalvorlage.
+<% end %>
 
 <%= render 'form', flat_template: @flat_template %>

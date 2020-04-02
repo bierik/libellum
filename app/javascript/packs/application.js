@@ -15,6 +15,7 @@ import '@fullcalendar/bootstrap/main.css'
 import 'tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.css'
 import '../../assets/stylesheets/calendar'
 import '../../assets/stylesheets/modal'
+import '../../assets/stylesheets/header'
 import '../../../vendor/assets/purpose/css/purpose'
 
 import 'jquery'

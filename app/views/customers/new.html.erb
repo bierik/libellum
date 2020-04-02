@@ -1,3 +1,9 @@
-<h1>Neuer <%= Customer.model_name.human %></h1>
+<% content_for(:header_title) do %>
+  Neuer <%= Customer.model_name.human %>
+<% end %>
+
+<% content_for(:header_subtitle) do %>
+  Erstellt einen neuen Kunden. Die Wegpauschale wird automatisch anhand der Adresse berechnet, wenn diese nicht angegeben wird.
+<% end %>
 
 <%= render 'form', customer: @customer %>
