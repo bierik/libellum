@@ -56,6 +56,9 @@ function createConfig(eventRender = () => {}) {
     selectable: true,
     editable: true,
     allDaySlot: false,
+    height: 'auto',
+    minTime: '06:00:00',
+    maxTime: '20:00:00',
     header: {
       left: 'today prev,next',
       center: 'title',

@@ -1,4 +1,6 @@
 class CustomersController < ApplicationController
+  layout 'fluid', only: :show
+
   before_action :set_customer, only: [:show, :edit, :update, :destroy, :update_route_flat]
 
   # GET /customers
