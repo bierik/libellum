@@ -1,5 +1,5 @@
 if Rails.env.test?
-  require Rails.root + 'test/support/google_maps_mock'
+  require Rails.root.join('test/support/google_maps_mock')
   Rails.application.config.google_maps_service = GoogleMapsMock
 else
   Google::Maps.configure do |config|

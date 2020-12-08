@@ -54,6 +54,11 @@ if Rails.const_defined? 'Server'
     # Read more: https://goo.gl/gqQ1xS
     # c.blacklist_keys = Rails.application.config.filter_parameters
   end
+
+  Airbrake.add_filter do |notice|
+    # Ignore SignalException when deploying to heroku
+    notice.ignore! if notice.stash[:exception].is_a?(SignalException)
+  end
 end
 
 # A filter that collects request body information. Enable it if you are sure you
