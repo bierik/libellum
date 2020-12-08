@@ -12,6 +12,9 @@ import api from '../src/api'
 import AddTaskDialog from './addTaskDialog'
 import EditTaskDialog from './editTaskDialog'
 
+// https://github.com/fullcalendar/fullcalendar/issues/5544
+window.FontAwesome.config.autoReplaceSvg = 'nest'
+
 let cal
 
 function createTask({ start, end, allDay, url }) {
@@ -57,10 +60,10 @@ function createConfig(eventRender = () => {}) {
     editable: true,
     allDaySlot: false,
     height: 'auto',
-    minTime: '06:00:00',
-    maxTime: '20:00:00',
-    header: {
-      left: 'today prev,next',
+    slotMinTime: '06:00:00',
+    slotMaxTime: '20:00:00',
+    headerToolbar: {
+      left: 'prev,next today',
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,listMonth',
     },
@@ -71,7 +74,7 @@ function createConfig(eventRender = () => {}) {
       jsEvent.preventDefault()
       EditTaskDialog.open(event)
     },
-    defaultDate: new URLSearchParams(document.location.search).get('current-date') || DateTime.local().toISODate(),
+    initialDate: new URLSearchParams(document.location.search).get('current-date') || DateTime.local().toISODate(),
     slotDuration: '00:15:00',
     scrollTime: '08:00:00',
     businessHours: {
@@ -80,12 +83,12 @@ function createConfig(eventRender = () => {}) {
       startTime: '08:00',
       endTime: '18:00',
     },
-    defaultView:
+    initialView:
       localStorage.getItem('fcDefaultView') !== null ? localStorage.getItem('fcDefaultView') : 'timeGridWeek',
-    datesRender({ view }) {
+    datesSet({ view }) {
       localStorage.setItem('fcDefaultView', view.type)
     },
-    eventRender,
+    eventDidMount: eventRender,
   }
 }
 
@@ -94,12 +97,12 @@ function destroyCalendar() {
   cal.destroy()
 }
 
-function initCalendar(selector, eventRender = () => {}) {
+function initCalendar(selector, eventRender) {
   const root = document.getElementById(selector)
   if (!root) return
   cal = new Calendar(root, createConfig(eventRender))
-  cal.addEventSource(root.dataset.eventSource)
-  window.requestAnimationFrame(() => cal.render())
+  cal.addEventSource({ url: root.dataset.eventSource })
+  cal.render()
 }
 
 AddTaskDialog.onSave(() => {
@@ -135,18 +138,16 @@ document.addEventListener('turbolinks:load', () =>
       el,
       view: { type },
     }) => {
-      const customerEl = $('<em>')
-        .addClass('small d-block')
-        .text(customer)
+      const customerEl = $('<em>').addClass('small d-block').text(customer)
       if (type !== 'listMonth') {
         if (brightColor) {
           $(el).addClass('text-dark')
         }
       }
       if (type === 'timeGridWeek') {
-        $('.fc-title', el).append(customerEl)
+        $('.fc-event-title-container', el).append(customerEl)
       } else if (type === 'listMonth') {
-        $('.fc-list-item-title', el).append(customerEl)
+        $('.fc-list-event-title', el).append(customerEl)
       }
     },
   ),

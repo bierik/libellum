@@ -12,13 +12,23 @@ class Task < ApplicationRecord
   def rrule
     datetime = I18n.l(self.datetime, format: :rrule)
     rrule_frequency = if fort_nightly?
-                        'FREQ=WEEKLY;INTERVAL=2'
+                        {
+                          freq: 'WEEKLY',
+                          interval: 2,
+                        }
                       elsif never?
-                        'COUNT=1'
+                        {
+                          count: 1,
+                        }
                       else
-                        "FREQ=#{frequency.upcase}"
+                        {
+                          freq: frequency.upcase,
+                        }
                       end
-    "DTSTART;TZID=#{Rails.application.config.time_zone}:#{datetime}\n#{rrule_frequency}"
+    {
+      dtstart: datetime,
+      tzid: Rails.application.config.time_zone,
+    }.merge(rrule_frequency)
   end
 
   def self.selectable_frequencies

@@ -34,28 +34,33 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
   test 'should create single task' do
     assert_create_task('never',
                        'title' => 'Fahren',
-                       'rrule' => "DTSTART;TZID=Europe/Zurich:20200204T000000\nCOUNT=1",
+                       'rrule' => { 'dtstart' => '20200204T000000', 'tzid' => 'Europe/Zurich', 'count' => 1 },
                        'duration' => '02:00',)
   end
 
   test 'should create fort nightly task' do
     assert_create_task('fort_nightly',
                        'title' => 'Fahren',
-                       'rrule' => "DTSTART;TZID=Europe/Zurich:20200204T000000\nFREQ=WEEKLY;INTERVAL=2",
+                       'rrule' => {
+                         'dtstart' => '20200204T000000',
+                         'tzid' => 'Europe/Zurich',
+                         'freq' => 'WEEKLY',
+                         'interval' => 2,
+                       },
                        'duration' => '02:00',)
   end
 
   test 'should create weekly task' do
     assert_create_task('weekly',
                        'title' => 'Fahren',
-                       'rrule' => "DTSTART;TZID=Europe/Zurich:20200204T000000\nFREQ=WEEKLY",
+                       'rrule' => { 'dtstart' => '20200204T000000', 'tzid' => 'Europe/Zurich', 'freq' => 'WEEKLY' },
                        'duration' => '02:00',)
   end
 
   test 'should create monthly task' do
     assert_create_task('monthly',
                        'title' => 'Fahren',
-                       'rrule' => "DTSTART;TZID=Europe/Zurich:20200204T000000\nFREQ=MONTHLY",
+                       'rrule' => { 'dtstart' => '20200204T000000', 'tzid' => 'Europe/Zurich', 'freq' => 'MONTHLY' },
                        'duration' => '02:00',)
   end
 

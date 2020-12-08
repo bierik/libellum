@@ -17,8 +17,6 @@ export default abstractDialog({
     $('#task_datetime').datetimepicker('date', startDateTime.toJSDate())
     const duration = endDateTime.diff(startDateTime).toFormat('hh:mm')
     $('#task_duration').val(duration)
-    $('#task_title')
-      .val('')
-      .focus()
+    $('#task_title').val('').trigger('focus')
   },
 })

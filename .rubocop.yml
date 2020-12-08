@@ -1,5 +1,6 @@
 AllCops:
   NewCops: enable
+  SuggestExtensions: false
 Style/TrailingCommaInArguments:
   EnforcedStyleForMultiline: consistent_comma
 Style/TrailingCommaInHashLiteral:
