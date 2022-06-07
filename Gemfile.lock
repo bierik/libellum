@@ -137,7 +137,7 @@ GEM
       nokogiri (>= 1.6)
     jbuilder (2.10.1)
       activesupport (>= 5.0.0)
-    jmespath (1.4.0)
+    jmespath (1.6.1)
     json (2.3.1)
     listen (3.3.3)
       rb-fsevent (~> 0.10, >= 0.10.3)
