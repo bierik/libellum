@@ -1,11 +1,11 @@
-import { Calendar } from '@fullcalendar/core'
-import rrulePlugin from '@fullcalendar/rrule'
-import locale from '@fullcalendar/core/locales/de'
-import interactionPlugin from '@fullcalendar/interaction'
-import timeGridPlugin from '@fullcalendar/timegrid'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import listPlugin from '@fullcalendar/list'
-import bootstrap from '@fullcalendar/bootstrap'
+// import { Calendar } from '@fullcalendar/core'
+// import rrulePlugin from '@fullcalendar/rrule'
+// import locales from '@fullcalendar/locales'
+// import interactionPlugin from '@fullcalendar/interaction'
+// import timeGridPlugin from '@fullcalendar/timegrid'
+// import dayGridPlugin from '@fullcalendar/daygrid'
+// import listPlugin from '@fullcalendar/list'
+// import bootstrap from '@fullcalendar/bootstrap'
 import { DateTime } from 'luxon'
 import $ from 'jquery'
 import api from '../src/api'
@@ -13,7 +13,7 @@ import AddTaskDialog from './addTaskDialog'
 import EditTaskDialog from './editTaskDialog'
 
 // https://github.com/fullcalendar/fullcalendar/issues/5544
-window.FontAwesome.config.autoReplaceSvg = 'nest'
+// window.FontAwesome.config.autoReplaceSvg = 'nest'
 
 let cal
 
@@ -50,9 +50,9 @@ async function editTask({ event: { start, end, title, url }, revert }) {
 
 function createConfig(eventRender = () => {}) {
   return {
-    plugins: [timeGridPlugin, rrulePlugin, interactionPlugin, listPlugin, dayGridPlugin, bootstrap],
+    // plugins: [timeGridPlugin, rrulePlugin, interactionPlugin, listPlugin, dayGridPlugin, bootstrap],
     themeSystem: 'bootstrap',
-    locale,
+    locale: 'de',
     displayEventEnd: true,
     nowIndicator: true,
     weekNumbers: true,
@@ -100,7 +100,7 @@ function destroyCalendar() {
 function initCalendar(selector, eventRender) {
   const root = document.getElementById(selector)
   if (!root) return
-  cal = new Calendar(root, createConfig(eventRender))
+  cal = new FullCalendar.Calendar(root, createConfig(eventRender))
   cal.addEventSource({ url: root.dataset.eventSource })
   cal.render()
 }
@@ -127,8 +127,8 @@ EditTaskDialog.onDelete(() => {
   cal.refetchEvents()
 })
 
-document.addEventListener('turbolinks:load', () => initCalendar('calendar-customer-root'))
-document.addEventListener('turbolinks:load', () =>
+document.addEventListener('turbo:load', () => initCalendar('calendar-customer-root'))
+document.addEventListener('turbo:load', () =>
   initCalendar(
     'calendar-dashboard-root',
     ({
@@ -153,8 +153,9 @@ document.addEventListener('turbolinks:load', () =>
   ),
 )
 
-document.addEventListener('turbolinks:before-cache', () => {
+document.addEventListener('turbo:before-cache', () => {
   AddTaskDialog.close()
   EditTaskDialog.close()
   destroyCalendar()
 })
+

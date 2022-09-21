@@ -14,6 +14,8 @@ class UserInvitationTest < ApplicationSystemTestCase
     fill_in 'E-Mail', with: 'harry.potter@example.org'
     click_on 'Einladung senden'
 
+    p ActionMailer::Base.deliveries.first
+    sleep
     assert_emails 1
 
     # Parse invitation token out of the sent email.

@@ -1,4 +1,5 @@
 import $ from 'jquery'
+import { Modal } from 'bootstrap'
 
 export default function abstractDialog({ modalSelector, formSelector, beforeOpen = () => {}, init = () => {} } = {}) {
   const dialog = {
@@ -6,7 +7,8 @@ export default function abstractDialog({ modalSelector, formSelector, beforeOpen
     onCloseCallback: () => {},
     onDeleteCallback: () => {},
     modal(action) {
-      $(modalSelector).modal(action)
+      const modal = new Modal(document.querySelector(modalSelector))
+      modal.show()
     },
     open(...args) {
       beforeOpen(...args)

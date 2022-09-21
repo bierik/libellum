@@ -36,6 +36,7 @@
     "eslint": "^7.15.0",
     "prettier": "^2.2.1",
     "webpack": "^4",
+    "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^3.11.0"
   }
 }

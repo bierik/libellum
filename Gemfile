@@ -10,13 +10,13 @@ gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
 gem 'puma', '~> 4.3'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker'
+# gem 'webpacker'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -36,12 +36,15 @@ gem 'devise-i18n'
 gem 'devise_invitable'
 gem 'font-awesome-rails'
 gem 'google-maps'
+gem 'importmap-rails'
 gem 'inline_svg'
 gem 'prawn'
 gem 'prawn-table'
 gem 'rails-i18n', '~> 7'
 gem 'rubocop'
-gem 'sprockets-rails'
+gem 'sassc-rails'
+gem 'stimulus-rails'
+gem 'turbo-rails'
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
