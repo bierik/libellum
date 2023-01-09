@@ -20,7 +20,7 @@
     "@rails/webpacker": "^5.2.1",
     "bootstrap": "^4.5.3",
     "jquery": "^3.5.1",
-    "luxon": "^1.25.0",
+    "luxon": "^1.28.1",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.32",
     "rrule": "^2.6.4",
